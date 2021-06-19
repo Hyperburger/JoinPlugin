@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.permissions.Permission;
 
 public class JoinListener implements Listener {
 
@@ -43,13 +44,13 @@ public class JoinListener implements Listener {
 
                         String permission = idSection.getString("permission");
 
-                        if (player.hasPermission(permission)) {
+                        if (player.hasPermission(String.valueOf(permission))) {
                             // Sending the join message & Sounds
                             event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).
                                     replace("%player%", player.getName().
                                             replace("%playerdisplayname%", player.getDisplayName()))); // Message
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                allPlayers.playSound(player.getLocation(), Sound.valueOf(idSection.getString("Sound")), 1, 1); // Sound
+                                    allPlayers.playSound(player.getLocation(), Sound.valueOf(idSection.getString("Sound")), 1, 1); // Sound
                             }
 
                             if (idSection.getBoolean("Firework")){
@@ -65,11 +66,13 @@ public class JoinListener implements Listener {
                     }
                     // TODO: Make titles for 1.8
                     if (!JoinPlugin.mc18()) {
-                        player.sendTitle(config.getString("Join     Title.Title"),
-                                config.getString("Join Title.SubTitle"),
-                                config.getInt("Join Title.fadeIn"),
-                                config.getInt("Join Title.Stay"),
-                                config.getInt("Join Title.fadeOut"));
+                        if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
+                            player.sendTitle(config.getString("Join Title.Title"),
+                                    config.getString("Join Title.SubTitle"),
+                                    config.getInt("Join Title.fadeIn"),
+                                    config.getInt("Join Title.Stay"),
+                                    config.getInt("Join Title.fadeOut"));
+                        }
                     } else {
                         System.out.println("[JoinPlugin] -> cant send title! Minecraft Server Version: 1.8");
                         System.out.println("[JoinPlugin] -> Only works on 1.9+");
@@ -88,7 +91,7 @@ public class JoinListener implements Listener {
                 Utilis.spawnFireworks(player.getLocation(), 1);
             }
             for (String commands : config.getStringList("First Join.Commands")){
-
+                Utilis.configCommand(commands, player);
             }
         }
     }

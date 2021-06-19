@@ -15,8 +15,10 @@ public class ServerMOTD implements Listener {
 
     @EventHandler
     public void onPing(ServerListPingEvent event){
-        if (plugin.getConfig().getBoolean("MOTD.ServerMOTD.Enabled")){
-            event.setMotd(Ucolor.colorize(plugin.getConfig().getString("MOTD.ServerMOTD.Line-1") + "\n" + plugin.getConfig().getString("MOTD.ServerMOTD.Line-2")));
+        if (plugin.getConfig().getBoolean("MOTD.ServerMOTD.Enabled")) {
+            if (!plugin.getConfig().getBoolean("General.Maintenance.Enabled")) {
+                event.setMotd(Ucolor.colorize(plugin.getConfig().getString("MOTD.ServerMOTD.Line-1") + "\n" + plugin.getConfig().getString("MOTD.ServerMOTD.Line-2")));
+            }
         }
 
     }

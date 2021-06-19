@@ -26,8 +26,8 @@ public class DisplayJoinMotd extends SubCommand {
     @Override
     public void perfrom(Player player, String[] args, Plugin plugin) {
       if (player.hasPermission("joinplugin.command.displayjoinmotd")) {
-          for (String s : plugin.getConfig().getStringList("JoinMOTD.Message")) {
-              player.sendMessage(s);
+          for (String s : plugin.getConfig().getStringList("MOTD.JoinMOTD.Message")) {
+              Ucolor.sendMessage(player, s);
           }
       } else {
           Ucolor.NOPERM(player, "joinplugin.command.displayjoinmotd");

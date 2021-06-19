@@ -25,7 +25,7 @@ public class MaintenanceListener implements Listener {
     public void onMaintenance(PlayerJoinEvent event) {
         if (plugin.getConfig().getBoolean("General.Maintenance.Enabled")) {
             if (!event.getPlayer().hasPermission("joinplugin.maintenance")) {
-                event.getPlayer().kickPlayer(plugin.getConfig().getString("General.Maintenance.Maintenance Enabled"));
+                event.getPlayer().kickPlayer(Ucolor.colorize(plugin.getConfig().getString("General.Maintenance.Maintenance Enabled")));
             }
         }
     }

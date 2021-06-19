@@ -20,11 +20,13 @@ Enable Join Message By Groups: true #Set to false if you want to disable join/qu
 
 Groups:
   group1: # The id must be unique, you can add your own ids!
-    permission: "group1.join" # Make sure the player/rank/group has this permission. You can change it to whatever you'd like!
+    permission: "group1.join"
+    # Make sure the player/rank/group has this permission.
+    #You can change it to whatever you'd like!
     Join Message: "Group1 Joined!"
     Quit Message: "Group1 Left!"
     Firework: true # Set to false if you want to disable firework on join
-    Sound: "ITEM_PICKUP" # Makes sure to use the current sound version!
+    Sound: "BLOCK_NOTE_BLOCK_CHIME" # Makes sure to use the current sound version!
     commands: #[player] runs by the player, [console] runs from the console.
       - "[player] spawn"
       - "[player] kit starter"
@@ -34,7 +36,7 @@ Groups:
     Join Message: "%player% &cJoined the realm!"
     Quit Message: "Group2 Left!"
     Firework: true
-    Sound: "NOTE_PLING"
+    Sound: "BLOCK_NOTE_BLOCK_CHIME"
     commands:
       - "[player] spawn"
       - "[player] help"
@@ -51,6 +53,7 @@ MOTD:
     Line-2: "&f&lCHANGE THIS IN THE CONFIG.YML"
 
 Join Title: # Titles for when the player joins.
+  Enabled: true
   Title: "&c&lWELCOME"
   SubTitle: "&c&lWELCOME"
   fadeIn: 3 #Seconds
@@ -76,7 +79,7 @@ First Join: # This only works on the first join.
       - "&c&lWELCOME %line%PLAYER"
       - "&b&lCHECK COMMANDS"
   Commands:
-    - "spawn %player%"
+    - "[player] spawn"
 
 
 General:
