@@ -35,7 +35,7 @@ public final class JoinPlugin extends JavaPlugin {
 
 
     public void startMsg(){
-        double version = 1.1;
+        double version = 1.2;
         System.out.println("------------------");
         System.out.println("JoinPlugin: Successfully Loaded!");
         System.out.println(" ");
