@@ -25,6 +25,7 @@ public class SetMaxPlayers extends SubCommand {
     @Override
     public void perfrom(Player player, String[] args, Plugin plugin) {
         if (args.length > 1){
+            System.out.println("Debug");
 
         }
     }
