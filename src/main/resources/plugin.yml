@@ -1,0 +1,13 @@
+name: JoinPlugin
+version: ${project.version}
+main: me.hyperburger.joinplugin.JoinPlugin
+api-version: 1.17
+authors: [ HyperBurger ]
+description: A Custom Coded Join Plugin
+commands:
+  JoinPlugin:
+    description: JoinPlugin Main Command
+    aliases:
+      - jp
+      - joinp
+

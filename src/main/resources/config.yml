@@ -1,0 +1,97 @@
+            ############################################################
+
+# |                          JOIN PLUGIN ~ HYPERBURGER                          | #
+  # | Please rate my plugin 5 stars on spigot if you liked it, it's really important!  | #
+            ############################################################
+
+# If you receive an error when ServerCore loads, ensure that:
+#   - Indents are correct: YAML hierarchy is based entirely on indentation
+#   - You have "escaped" all apostrophes in your text: If you want to write "don't", for example, write "don''t" instead (note the doubled apostrophe)
+#   - Text with symbols is enclosed in single or double quotation marks
+# PLACEHOLDERS: & Information
+# Commands:
+#  [player] runs by the player,
+#  [console] runs from the console.
+# - %player% - player's name
+# - %playerdisplayname% - player's displayname
+
+# Version 1.0
+Enable Join Message By Groups: true #Set to false if you want to disable join/quit messages!
+
+Groups:
+  group1: # The id must be unique, you can add your own ids!
+    permission: "group1.join" # Make sure the player/rank/group has this permission. You can change it to whatever you'd like!
+    Join Message: "Group1 Joined!"
+    Quit Message: "Group1 Left!"
+    Firework: true # Set to false if you want to disable firework on join
+    Sound: "ITEM_PICKUP" # Makes sure to use the current sound version!
+    commands: #[player] runs by the player, [console] runs from the console.
+      - "[player] spawn"
+      - "[player] kit starter"
+      - "[console] broadcast hello!"
+  group2:
+    permission: "owners.join"
+    Join Message: "%player% &cJoined the realm!"
+    Quit Message: "Group2 Left!"
+    Firework: true
+    Sound: "NOTE_PLING"
+    commands:
+      - "[player] spawn"
+      - "[player] help"
+
+MOTD:
+  JoinMOTD: # When the player joins
+    Enabled: true # Set to false if you want to disable join MOTD
+    Message:
+      - "&a&JOIN MOTD WORKS"
+      - "&b&l&m---------------"
+  ServerMOTD: # On the server list
+    Enabled: true
+    Line-1: "&d&lJOIN PLUGIN"
+    Line-2: "&f&lCHANGE THIS IN THE CONFIG.YML"
+
+Join Title: # Titles for when the player joins.
+  Title: "&c&lWELCOME"
+  SubTitle: "&c&lWELCOME"
+  fadeIn: 3 #Seconds
+  Stay: 5 #Seconds
+  fadeOut: 3 #Seconds
+
+First Join: # This only works on the first join.
+  Message: "&b&l%player% FIRST JOINED THE SERVER" # Set to "" if you don't want any.
+  MOTD:
+    Enabled: true
+    Message:
+      - "&a&lFirst JOIN Server MOTD WORKS"
+      - "&a&lFirst JOIN &b&lServer MOTD WORKS"
+  Firework:
+    Enabled: true
+  Book: # SOON TO COME.
+    Enabled: false
+    Item: "ENCHANTED_BOOK"
+    Slot: 9
+    Title: "&c&lWELCOME"
+    Author: "HyperBurger"
+    Pages:
+      - "&c&lWELCOME %line%PLAYER"
+      - "&b&lCHECK COMMANDS"
+  Commands:
+    - "spawn %player%"
+
+
+General:
+  Whitelist:
+    Kick Message: "&c&lSERVER HAS BEEN WHITELISTED."
+  Maintenance:
+    Enabled: false
+    Kick Message: "&C&lMAINTENANCE MODE IS ON!"
+    Maintenance Enabled: "&b&lThis server is now in maintenance!" # This is also sent when the player are trying to join while its on!
+    Maintenance Disabled: "&b&lMAINTENANCE MODE DISABLED"
+    MOTD:
+      Line-1 : "&c&mMinecraft Server &f&lServer Maintenance"
+      Line-2 : "&3&oPlease come back later."
+
+
+
+    # |                          JOIN PLUGIN ~ HYPERBURGER                           | #
+  # | Please rate my plugin 5 stars on spigot if you liked it, it's really important!  | #
