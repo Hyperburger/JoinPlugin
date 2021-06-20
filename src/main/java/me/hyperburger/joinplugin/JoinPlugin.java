@@ -1,5 +1,6 @@
 package me.hyperburger.joinplugin;
 
+import com.earth2me.essentials.Essentials;
 import me.hyperburger.joinplugin.commands.CommandManager;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
@@ -9,7 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class JoinPlugin extends JavaPlugin {
 
-    public static final double version = 1.3;
+    public static final double version = 1.4;
+    public static Essentials essentials;
 
     @Override
     public void onEnable() {
@@ -18,6 +20,7 @@ public final class JoinPlugin extends JavaPlugin {
         saveDefaultConfig();
 
         startMsg();
+        checkEssentials();
 
         registerEvents();
         registerCommands();
@@ -44,14 +47,24 @@ Oh oh and another idea, make it compatible with both essentials and CMI and popu
 
 
     public void startMsg(){
-        System.out.println("---------(Join Plugin)---------");
-        System.out.println(" ");
-        System.out.println("JoinPlugin: Successfully Loaded!");
-        System.out.println(" ");
-        System.out.println("Author: HyperBurger");
-        System.out.println("version = " + version);
-        System.out.println(" ");
-        System.out.println("--------------------------------");
+        if (checkEssentials()) {
+            System.out.println("---------(Join Plugin)---------");
+            System.out.println(" ");
+            System.out.println("JoinPlugin: Successfully Loaded!");
+            System.out.println("Found and supporting Essentials");
+            System.out.println("Author: HyperBurger");
+            System.out.println("version = " + version);
+            System.out.println(" ");
+            System.out.println("--------------------------------");
+        } else {
+            System.out.println("---------(Join Plugin)---------");
+            System.out.println(" ");
+            System.out.println("JoinPlugin: Successfully Loaded!");
+            System.out.println("Author: HyperBurger");
+            System.out.println("version = " + version);
+            System.out.println(" ");
+            System.out.println("--------------------------------");
+        }
     }
 
     public void registerEvents(){
@@ -61,6 +74,22 @@ Oh oh and another idea, make it compatible with both essentials and CMI and popu
         this.getServer().getPluginManager().registerEvents(new MaintenanceListener(this), this);
         this.getServer().getPluginManager().registerEvents(new ServerMOTD(this),this);
         //this.getServer().getPluginManager().registerEvents(new JoinBook(this), this);
+    }
+
+    public boolean checkEssentials(){
+        if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
+            essentials = (Essentials) this.getServer().getPluginManager().getPlugin("Essentials");
+            return true;
+        } else {
+            System.out.println("---------(Join Plugin)---------");
+            System.out.println(" ");
+            System.out.println("Essentials isn't enabled/loaded on the server!");
+            System.out.println("Won't support essentials.");
+            System.out.println(" ");
+            System.out.println("--------------------------------");
+
+            return false;
+        }
     }
 
     public void registerCommands(){

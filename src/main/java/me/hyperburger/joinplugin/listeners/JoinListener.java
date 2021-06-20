@@ -1,5 +1,9 @@
 package me.hyperburger.joinplugin.listeners;
 
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.EssentialsEntityListener;
+import com.earth2me.essentials.User;
+import com.earth2me.essentials.commands.Commandvanish;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
@@ -46,9 +50,17 @@ public class JoinListener implements Listener {
 
                         if (player.hasPermission(String.valueOf(permission))) {
                             // Sending the join message & Sounds
-                            event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).
-                                    replace("%player%", player.getName().
-                                            replace("%playerdisplayname%", player.getDisplayName()))); // Message
+                            if (config.getBoolean("SupportEssentialXVanish")){ // Checking if essentials support is enabled
+                                if (plugin.checkEssentials()) { // if essentials exists
+                                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) { // Checking if the user is vanished
+                                        event.setJoinMessage(""); // Setting the message to nothing
+                                    } else {
+                                        event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))); // Sending message if support enabled
+                                    }
+                                }
+                            } else {
+                                event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))); // Sending message if support isn't enabled
+                            }
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
                                     allPlayers.playSound(player.getLocation(), Sound.valueOf(idSection.getString("Sound")), 1, 1); // Sound
                             }

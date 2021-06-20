@@ -17,7 +17,8 @@
 
 # Version 1.0
 Enable Join Message By Groups: true #Set to false if you want to disable join/quit messages!
-
+SupportEssentialXVanish: true # Set to false if you don't want silent join if a player is vanished
+#
 Groups:
   group1: # The id must be unique, you can add your own ids!
     permission: "group1.join"

@@ -1,7 +1,7 @@
 name: JoinPlugin
 version: ${project.version}
 main: me.hyperburger.joinplugin.JoinPlugin
-api-version: 1.12
+api-version: 1.13
 authors: [ HyperBurger ]
 description: A Custom Coded Join Plugin
 commands:
