@@ -43,7 +43,7 @@ public class CommandManager implements CommandExecutor {
                 }
             } else {
                 player.sendMessage(" ");
-                player.sendMessage(Ucolor.colorize("    &5&m----------&d&l JOIN PLUGIN &5&m----------"));
+                player.sendMessage(Ucolor.colorize("    &5&m----------&d&l JOIN PLUGIN &fv" + JoinPlugin.version + " &5&m----------"));
                 player.sendMessage(" ");
                 for (int i = 0; i < getSubCommands().size(); i++) {
                     player.sendMessage(Ucolor.colorize(" &8[&3&l*&8] &f" + getSubCommands().get(i).getSyntx() + " &d- &7" + getSubCommands().get(i).getDescription()));
