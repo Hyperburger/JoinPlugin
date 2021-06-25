@@ -1,4 +1,4 @@
-<h1 align='center'> JoinPlugin :wave:</h1>
+<h1 align='center'> JoinPlugin </h1>
 <p align='center'>
 Hi! I'm HyperBurger.
 </p>
