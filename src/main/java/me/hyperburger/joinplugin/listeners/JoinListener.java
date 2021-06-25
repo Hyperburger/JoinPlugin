@@ -17,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.Permission;
 
+import java.util.logging.Logger;
+
 public class JoinListener implements Listener {
 
     public JoinPlugin plugin;
@@ -62,7 +64,11 @@ public class JoinListener implements Listener {
                                 event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))); // Sending message if support isn't enabled
                             }
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                                try {
                                     allPlayers.playSound(player.getLocation(), Sound.valueOf(idSection.getString("Sound")), 1, 1); // Sound
+                                }catch (IllegalArgumentException e) {
+                                    Utilis.logMessage(this.getClass(),"[JoinPlugin] The sound " +idSection.getString("Sound") + " doesn't exist in your server version!");
+                                    }
                             }
 
                             if (idSection.getBoolean("Firework")){
@@ -96,8 +102,12 @@ public class JoinListener implements Listener {
                     replace("%player%", player.getName()
                             .replace("%playerdisplayname%", player.getDisplayName())));
             System.out.println(player.getName() + " has joined for the first time!");
-            for (Player allPlayers : Bukkit.getOnlinePlayers()){
-                allPlayers.playSound(player.getLocation(), Sound.valueOf(config.getString("First Join.Sound")), 1, 1); // Sound
+            for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                try {
+                    allPlayers.playSound(player.getLocation(), Sound.valueOf(config.getString("Sound")), 1, 1); // Sound
+                }catch (IllegalArgumentException e) {
+                    Utilis.logMessage(this.getClass(),"[JoinPlugin] The sound " + config.getString("Sound") + " doesn't exist in your server version!");
+                }
             }
             if (config.getBoolean("First Join.Firework.Enabled")){
                 Utilis.spawnFireworks(player.getLocation(), 1);

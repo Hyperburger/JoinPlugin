@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class JoinPlugin extends JavaPlugin {
 
-    public static final double version = 1.4;
+    public static final double version = 1.5;
     public static Essentials essentials;
 
     @Override
@@ -62,6 +62,10 @@ Oh oh and another idea, make it compatible with both essentials and CMI and popu
             System.out.println("JoinPlugin: Successfully Loaded!");
             System.out.println("Author: HyperBurger");
             System.out.println("version = " + version);
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("Essentials isn't enabled/loaded on the server!");
+            System.out.println("Won't support essentials.");
             System.out.println(" ");
             System.out.println("--------------------------------");
         }

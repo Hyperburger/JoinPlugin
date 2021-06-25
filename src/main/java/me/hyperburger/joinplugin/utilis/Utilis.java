@@ -1,5 +1,6 @@
 package me.hyperburger.joinplugin.utilis;
 
+import me.hyperburger.joinplugin.listeners.JoinListener;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -9,6 +10,8 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Utilis {
 
@@ -23,6 +26,15 @@ public class Utilis {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("[console] ", "").replace("%player%", player.getName()));
 
         }
+    }
+
+    public static String logMessage(Class<?> className, String message){
+
+        Logger logger =Logger.getLogger(className.getName());
+        logger.setLevel(Level.WARNING);
+        logger.warning(message);
+
+         return message;
     }
 
     public static void createItem(Material material, String Displayname, List<String> lore){
