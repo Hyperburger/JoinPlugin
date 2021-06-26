@@ -1,9 +1,5 @@
 package me.hyperburger.joinplugin.listeners;
 
-import com.earth2me.essentials.Essentials;
-import com.earth2me.essentials.EssentialsEntityListener;
-import com.earth2me.essentials.User;
-import com.earth2me.essentials.commands.Commandvanish;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
@@ -15,14 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.permissions.Permission;
 
-import java.util.logging.Logger;
 
 public class JoinListener implements Listener {
 
     public JoinPlugin plugin;
-
     public JoinListener(JoinPlugin plugin){
         this.plugin = plugin;
     }
@@ -48,21 +41,26 @@ public class JoinListener implements Listener {
                         ConfigurationSection idSection = rewardSection.getConfigurationSection(key);
                         // We have idSection
 
-                        String permission = idSection.getString("permission");
+                        String permission = idSection.getString("permission");  // Permission
 
                         if (player.hasPermission(String.valueOf(permission))) {
-                            // Sending the join message & Sounds
-                            if (config.getBoolean("SupportEssentialXVanish")){ // Checking if essentials support is enabled
-                                if (plugin.checkEssentials()) { // if essentials exists
-                                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) { // Checking if the user is vanished
+
+                            // Essentials Section
+                            if (config.getBoolean("SupportEssentialXVanish")){
+                                if (plugin.checkEssentials()) { // If essentials exists
+                                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) { // If vanish is enabled
                                         event.setJoinMessage(""); // Setting the message to nothing
                                     } else {
-                                        event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))); // Sending message if support enabled
+                                        event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message"))
+                                                .replace("%player%", player.getName()
+                                                .replace("%playerdisplayname%", player.getDisplayName())));
                                     }
                                 }
                             } else {
                                 event.setJoinMessage(Ucolor.colorize(idSection.getString("Join Message")).replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))); // Sending message if support isn't enabled
                             }
+
+                            // Sound: "" | Section
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
                                 try {
                                     allPlayers.playSound(player.getLocation(), Sound.valueOf(idSection.getString("Sound")), 1, 1); // Sound
@@ -71,17 +69,18 @@ public class JoinListener implements Listener {
                                     }
                             }
 
+                            // Firework: "" | Section
                             if (idSection.getBoolean("Firework")){
                                 Utilis.spawnFireworks(player.getLocation(), 1);
-                                    // Spawning a firework if enabled.
                             }
 
+                            // Commands: "" | Section
                             for (String s : idSection.getStringList("commands")) {
                                 Utilis.configCommand(s, player);
-                                // commands: "" | Section
                             }
                         }
                     }
+
                     // TODO: Make titles for 1.8
                     if (!JoinPlugin.mc18()) {
                         if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
@@ -97,6 +96,13 @@ public class JoinListener implements Listener {
                     }
                 }
             }
+
+            /*
+            First Join Section
+            This needs to be transferred to a new class.
+            To make the code as clean and organized as possible.
+             */
+
         } else {
             event.setJoinMessage(Ucolor.colorize(config.getString("First Join.Message")).
                     replace("%player%", player.getName()

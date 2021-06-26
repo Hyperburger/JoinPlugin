@@ -17,7 +17,10 @@ public class MaintenanceListener implements Listener {
     @EventHandler
     public void onPing(ServerListPingEvent event){
         if (plugin.getConfig().getBoolean("General.Maintenance.Enabled")){
-            event.setMotd(Ucolor.colorize(plugin.getConfig().getString("General.Maintenance.MOTD.Line-1") + "\n" + plugin.getConfig().getString("General.Maintenance.MOTD.Line-2")));
+            event.setMotd(Ucolor.colorize(
+                    plugin.getConfig().getString("General.Maintenance.MOTD.Line-1")
+                            + "\n" +
+                     plugin.getConfig().getString("General.Maintenance.MOTD.Line-2")));
         }
     }
 

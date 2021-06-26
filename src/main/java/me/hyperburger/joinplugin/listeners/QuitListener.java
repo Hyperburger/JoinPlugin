@@ -2,6 +2,7 @@ package me.hyperburger.joinplugin.listeners;
 
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
+import me.hyperburger.joinplugin.utilis.Utilis;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
@@ -38,7 +39,7 @@ public class QuitListener implements Listener {
 
                     if (player.hasPermission(permission)) {
 
-                        event.setQuitMessage(Ucolor.colorize(idSection.getString("Quit Message")));
+                        event.setQuitMessage(Ucolor.colorize(idSection.getString("Quit Message").replace("%player%", player.getName().replace("%playerdisplayname", player.getDisplayName()))));
 
                         for (String s : idSection.getStringList("commands")) {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("%player%", player.getName()));

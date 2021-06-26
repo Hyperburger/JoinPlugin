@@ -28,6 +28,12 @@ public class Utilis {
         }
     }
 
+    public static void sendMessageToAllPlayers(String s){
+        for (Player allPlayers : Bukkit.getOnlinePlayers()){
+            Ucolor.sendMessage(allPlayers, s);
+        }
+    }
+
     public static String logMessage(Class<?> className, String message){
 
         Logger logger =Logger.getLogger(className.getName());
