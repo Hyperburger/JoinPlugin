@@ -25,6 +25,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new DisplayJoinMotd());
         subCommands.add(new WhiteList());
         subCommands.add(new Maintenance());
+        subCommands.add(new SetMaxPlayers());
     }
 
     @Override

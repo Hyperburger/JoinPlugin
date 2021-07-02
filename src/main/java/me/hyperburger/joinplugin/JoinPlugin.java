@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class JoinPlugin extends JavaPlugin {
 
-    public static final double version = 1.5;
+    public static final double version = 1.6;
     public static Essentials essentials;
 
     @Override
@@ -40,11 +40,6 @@ Oh oh and another idea, make it compatible with both essentials and CMI and popu
     public void onDisable() {
         
     }
-    
-    
-    
-
-
 
     public void startMsg(){
         if (checkEssentials()) {
@@ -99,7 +94,6 @@ Oh oh and another idea, make it compatible with both essentials and CMI and popu
     public void registerCommands(){
         this.getCommand("joinplugin").setExecutor(new CommandManager(this));
     }
-
     public static boolean mc18 (){
         return Bukkit.getServer().getVersion().contains("1.8");
     }

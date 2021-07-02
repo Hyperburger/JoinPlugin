@@ -20,11 +20,9 @@ Enable Join Message By Groups: true #Set to false if you want to disable join/qu
 SupportEssentialXVanish: true # Set to false if you don't want silent join if a player is vanished
 #
 Groups:
-  group1: # The id must be unique, you can add your own ids!
-    permission: "group1.join"
-    # Make sure the player/rank/group has this permission.
-    #You can change it to whatever you'd like!
-    Join Message: "Group1 Joined!"
+  group1: # The id must be unique, you can add your own ids! <----You can add infinite groups---->
+    permission: "group1.join"  # Make sure the player/rank/group has this permission.
+    Join Message: "Group1 Joined!"  #You can change it to whatever you'd like!
     Quit Message: "Group1 Left!"
     Firework: true # Set to false if you want to disable firework on join
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
@@ -43,9 +41,14 @@ Groups:
       - "[player] help"
 
 MOTD:
+  MaxPlayers:
+    Enabled: true
+    MaxPlayers: 200
+    KickMessage: "&c&lThe Server is full!"
   JoinMOTD: # When the player joins
     Enabled: true # Set to false if you want to disable join MOTD
-    Message:
+    Message: # <--- Add as many lines as you want --->
+      - "&f&l&m----------"
       - "&a&JOIN MOTD WORKS"
       - "&b&l&m---------------"
   ServerMOTD: # On the server list
