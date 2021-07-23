@@ -26,6 +26,7 @@ Groups:
     Quit Message: "Group1 Left!"
     Firework: true # Set to false if you want to disable firework on join
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
+    Effect: "EXPLOSION"
     commands: #[player] runs by the player, [console] runs from the console.
       - "[player] spawn"
       - "[player] kit starter"
@@ -36,6 +37,7 @@ Groups:
     Quit Message: "Group2 Left!"
     Firework: true
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
+    Effect: "EXPLOSION"
     commands:
       - "[player] spawn"
       - "[player] help"
