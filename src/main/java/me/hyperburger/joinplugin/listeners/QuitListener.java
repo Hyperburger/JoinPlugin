@@ -36,18 +36,47 @@ public class QuitListener implements Listener {
 
                     String permission = idSection.getString("permission");
 
-                    if (player.hasPermission(permission)) {
+                    if (player.hasPermission(String.valueOf(permission))) {
 
-                        event.setQuitMessage(Ucolor.colorize(idSection.getString("Quit Message").replace("%player%", player.getName().replace("%playerdisplayname", player.getDisplayName()))));
+                        if (config.getBoolean("SupportEssentialXVanish")) {
+                            if (plugin.checkEssentials()) {
+                                if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {         /* Checking the player is actually vanished. */
+                                    event.setQuitMessage("");                                                   /* Setting the message to null/nothing. */
+                                } else {
+                                    if (!JoinPlugin.mc116() || !JoinPlugin.mc117()) {
+                                        event.setQuitMessage(Ucolor.colorize(idSection.getString("Join Message"))
+                                                .replace("%player%", player.getName()
+                                                        .replace("%playerdisplayname%", player.getDisplayName())));
+                                    } else {
+                                        event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Join Message"))
+                                                .replace("%player%", player.getName()
+                                                        .replace("%playerdisplayname%", player.getDisplayName()))));
+                                    }
+                                }
+                            }
+                        } else {
+                        if (!JoinPlugin.mc116() || !JoinPlugin.mc117()) {
+                            event.setQuitMessage(Ucolor.colorize(idSection.getString("Join Message"))
+                                    .replace("%player%", player.getName()                           /* If essentials doesn't work send this instead. */
+                                            .replace("%playerdisplayname%", player.getDisplayName())));
+                        } else {
+                            event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Join Message"))
+                                    .replace("%player%", player.getName()
+                                            .replace("%playerdisplayname%", player.getDisplayName()))));
+                        }
+                    }
 
-                        for (String s : idSection.getStringList("commands")) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("%player%", player.getName()));
+                            event.setQuitMessage(Ucolor.colorize(idSection.getString("Quit Message").replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))));
+
+                            for (String s : idSection.getStringList("commands")) {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("%player%", player.getName()));
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
+
 
 

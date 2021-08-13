@@ -17,12 +17,12 @@ public class Menu extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp menu";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
 
 
     }

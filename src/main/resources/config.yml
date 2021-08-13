@@ -20,13 +20,12 @@ Enable Join Message By Groups: true #Set to false if you want to disable join/qu
 SupportEssentialXVanish: true # Set to false if you don't want silent join if a player is vanished
 #
 Groups:
-  group1: # The id must be unique, you can add your own ids! <----You can add infinite groups---->
+  group1: # The id must be unique, <----You can add infinite groups---->
     permission: "group1.join"  # Make sure the player/rank/group has this permission.
     Join Message: "Group1 Joined!"  #You can change it to whatever you'd like!
     Quit Message: "Group1 Left!"
     Firework: true # Set to false if you want to disable firework on join
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
-    Effect: "EXPLOSION"
     commands: #[player] runs by the player, [console] runs from the console.
       - "[player] spawn"
       - "[player] kit starter"
@@ -37,7 +36,6 @@ Groups:
     Quit Message: "Group2 Left!"
     Firework: true
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
-    Effect: "EXPLOSION"
     commands:
       - "[player] spawn"
       - "[player] help"
@@ -51,7 +49,8 @@ MOTD:
     Enabled: true # Set to false if you want to disable join MOTD
     Message: # <--- Add as many lines as you want --->
       - "&f&l&m----------"
-      - "&a&JOIN MOTD WORKS"
+      - "&a&This is the join MOTD"
+      - "&a&lWelcome to our server"
       - "&b&l&m---------------"
   ServerMOTD: # On the server list
     Enabled: true
@@ -75,18 +74,6 @@ First Join: # This only works on the first join.
       - "&a&lFirst JOIN &b&lServer MOTD WORKS"
   Firework:
     Enabled: true
-  Book: # SOON TO COME.
-    Enabled: false
-    Item: "ENCHANTED_BOOK"
-    Slot: 9
-    Title: "&c&lWELCOME"
-    Author: "HyperBurger"
-    Pages:
-      - "&c&lWELCOME %line%PLAYER"
-      - "&b&lCHECK COMMANDS"
-  Commands:
-    - "[player] spawn"
-
 
 General:
   Whitelist:

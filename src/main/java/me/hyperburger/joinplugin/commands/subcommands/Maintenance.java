@@ -19,12 +19,12 @@ public class Maintenance extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp maintenance";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
         if (player.hasPermission("joinplugin.command.maintenance")) {
             if (!plugin.getConfig().getBoolean("General.Maintenance.Enabled")) {
                 for (Player allPlayers : Bukkit.getOnlinePlayers()) {

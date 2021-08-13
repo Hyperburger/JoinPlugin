@@ -18,12 +18,12 @@ public class ServerMotd extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp servermotd";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
         if (player.hasPermission("joinplugin.command.displayservermotd")) {
             player.sendMessage(Ucolor.colorize(
                     plugin.getConfig().getString("MOTD.ServerMOTD.Line-1") + "\n" +

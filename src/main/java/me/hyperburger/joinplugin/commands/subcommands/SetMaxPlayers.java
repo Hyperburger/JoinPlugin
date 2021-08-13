@@ -20,12 +20,12 @@ public class SetMaxPlayers extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp setmaxplayers <number>";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
         if (args.length > 1){
 
             if (!player.hasPermission("joinplugin.command.maxplayers")) return;

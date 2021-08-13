@@ -1,6 +1,5 @@
 package me.hyperburger.joinplugin.utilis;
 
-import me.hyperburger.joinplugin.listeners.JoinListener;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -15,25 +14,38 @@ import java.util.logging.Logger;
 
 public class Utilis {
 
-    public static boolean FirstJoiner(Player player){
-        return player.hasPlayedBefore();
-    }
-
-    public static void configCommand (String s, Player player){
-        if (s.startsWith("[player]")){
-            Bukkit.dispatchCommand(player, s.replace("[player] ", "").replace("%player%", player.getName()));
-        } else if (s.startsWith("[console]")){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("[console] ", "").replace("%player%", player.getName()));
+    /**
+     * Executable by players or console.
+     * [player] | [console]
+     * @param command The command line that will be executed.
+     * @param player The player that the command will be executed from.
+     * Supports placeholders. %player% - player's name.
+     */
+    public static void configCommand (String command, Player player){
+        if (command.startsWith("[player]")){
+            Bukkit.dispatchCommand(player, command.replace("[player] ", "").replace("%player%", player.getName()));
+        } else if (command.startsWith("[console]")){
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("[console] ", "").replace("%player%", player.getName()));
 
         }
     }
 
+    /**
+     * Send a message to all online players.
+     * @param s The message to send to all players.
+     * Doesn't support placeholders atm.
+     */
     public static void sendMessageToAllPlayers(String s){
         for (Player allPlayers : Bukkit.getOnlinePlayers()){
             Ucolor.sendMessage(allPlayers, s);
         }
     }
 
+    /**
+     * Log message, send to console.
+     * @param className the class that is using this log message.
+     * @param message The message the OP wants to send.
+     */
     public static String logMessage(Class<?> className, String message){
 
         Logger logger =Logger.getLogger(className.getName());
@@ -43,17 +55,28 @@ public class Utilis {
          return message;
     }
 
-    public static void createItem(Material material, String Displayname, List<String> lore){
+    /**
+     * A fast way to create an item.
+     * @param material The command line that will be executed.
+     * @param displayname The display name of the item.
+     * @param lore The item's lore.
+     */
+    public static void createItem(Material material, String displayname, List<String> lore){
 
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemMeta.setDisplayName(Ucolor.colorize(Displayname));
+        itemMeta.setDisplayName(Ucolor.colorize(displayname));
         itemMeta.setLore(lore);
 
         itemStack.setItemMeta(itemMeta);
     }
 
+    /**
+     * Spawn a firework (Hard Coded)
+     * @param location The chosen location, usually a player.
+     * @param amount starts from 0.
+     */
     public static void spawnFireworks(Location location, int amount){
         Location loc = location;
         Firework fw = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);

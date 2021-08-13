@@ -15,14 +15,15 @@ public final class JoinPlugin extends JavaPlugin {
      * @author HyperBurger
      */
 
-    public static final double version = 1.7;
+    public static final double version = 2;
     public static Essentials essentials;
 
     @Override
     public void onEnable() {
 
-        getConfig().options().copyDefaults(true);
-        saveDefaultConfig();
+        this.getConfig().options().copyDefaults(true);
+        this.saveDefaultConfig();
+        this.reloadConfig();
 
         startMsg();
         checkEssentials();
@@ -30,10 +31,12 @@ public final class JoinPlugin extends JavaPlugin {
         registerEvents();
         registerCommands();
     }
+
     public void registerEvents(){
         PluginManager pluginManager = this.getServer().getPluginManager();
 
         pluginManager.registerEvents(new JoinListener(this), this);
+        pluginManager.registerEvents(new FirstJoinListener(this), this);
         pluginManager.registerEvents(new JoinMotd(this), this);
         pluginManager.registerEvents(new QuitListener(this), this);
         pluginManager.registerEvents(new MaintenanceListener(this), this);
@@ -49,42 +52,30 @@ public final class JoinPlugin extends JavaPlugin {
         if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
             essentials = (Essentials) this.getServer().getPluginManager().getPlugin("Essentials");
             return true;
-        } else {
-            System.out.println("---------(Join Plugin)---------");
-            System.out.println(" ");
-            System.out.println("Essentials isn't enabled/loaded on the server!");
-            System.out.println("Won't support essentials.");
-            System.out.println(" ");
-            System.out.println("--------------------------------");
-
-            return false;
         }
+        return false;
     }
 
     public void startMsg(){
-        if (checkEssentials()) {
-            System.out.println("  ------------(Join Plugin)------------");
-            System.out.println(" ");
-            System.out.println("    JoinPlugin: Successfully Loaded!");
-            System.out.println("    Found and supporting Essentials");
-            System.out.println("    Author: HyperBurger");
-            System.out.println("    version = " + version);
-            System.out.println(" ");
-            System.out.println("  -------------------------------------");
-        } else {
-            System.out.println("  ------------(Join Plugin)------------");
+            System.out.println("  ------------(Join Plugin)------------  ");
             System.out.println(" ");
             System.out.println("    JoinPlugin: Successfully Loaded!");
             System.out.println("    Author: HyperBurger");
             System.out.println("    version = " + version);
             System.out.println(" ");
-            System.out.println("  -------------------------------------");
-        }
+            System.out.println("  -------------------------------------  ");
     }
 
     public static boolean mc18 (){
         return Bukkit.getServer().getVersion().contains("1.8");
     }
+    public static boolean mc116 (){
+        return Bukkit.getServer().getVersion().contains("1.16");
+    }
+    public static boolean mc117 (){
+        return Bukkit.getServer().getVersion().contains("1.17");
+    }
+
 
 
 }

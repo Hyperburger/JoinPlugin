@@ -19,12 +19,12 @@ public class ReloadCommand extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp reload";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
         if (player.hasPermission("joinplugin.command.reload")) {
             Ucolor.sendMessage(player, "&a&lConfig Successfully Reloaded!");
             plugin.reloadConfig();

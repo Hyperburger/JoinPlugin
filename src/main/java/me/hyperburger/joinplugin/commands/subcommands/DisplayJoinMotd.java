@@ -19,12 +19,12 @@ public class DisplayJoinMotd extends SubCommand {
     }
 
     @Override
-    public String getSyntx() {
+    public String getSyntax() {
         return "/jp joinmotd";
     }
 
     @Override
-    public void perfrom(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin plugin) {
       if (player.hasPermission("joinplugin.command.displayjoinmotd")) {
           for (String s : plugin.getConfig().getStringList("MOTD.JoinMOTD.Message")) {
               Ucolor.sendMessage(player, s);
