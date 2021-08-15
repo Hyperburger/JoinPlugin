@@ -2,7 +2,6 @@ package me.hyperburger.joinplugin.listeners;
 
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -12,7 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QuitListener implements Listener {
 
-    private JoinPlugin plugin;
+    private final JoinPlugin plugin;
 
     public QuitListener(JoinPlugin plugin) {
         this.plugin = plugin;
@@ -26,57 +25,47 @@ public class QuitListener implements Listener {
         Configuration config = plugin.getConfig();
         ConfigurationSection rewardSection = config.getConfigurationSection("Groups");
 
-        if (config.getBoolean("Enable Join Message By Groups")) {
+        if (!config.getBoolean("Enable Join Message By Groups")) return;
+        if (rewardSection == null) return;
 
-            if (rewardSection != null) {
+        for (String key : rewardSection.getKeys(false)) {
 
-                for (String key : rewardSection.getKeys(false)) {
+            ConfigurationSection idSection = rewardSection.getConfigurationSection(key);     /* We now have idSection and can access it. */
+            String permission = idSection.getString("permission");
 
-                    ConfigurationSection idSection = rewardSection.getConfigurationSection(key);
+            if (permission != null && player.hasPermission((permission))) {
 
-                    String permission = idSection.getString("permission");
+                if (config.getBoolean("SupportEssentialXVanish") && plugin.checkEssentials()) {
+                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {
+                        event.setQuitMessage("");
 
-                    if (player.hasPermission(String.valueOf(permission))) {
-
-                        if (config.getBoolean("SupportEssentialXVanish")) {
-                            if (plugin.checkEssentials()) {
-                                if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {         /* Checking the player is actually vanished. */
-                                    event.setQuitMessage("");                                                   /* Setting the message to null/nothing. */
-                                } else {
-                                    if (!JoinPlugin.mc116() || !JoinPlugin.mc117()) {
-                                        event.setQuitMessage(Ucolor.colorize(idSection.getString("Join Message"))
-                                                .replace("%player%", player.getName()
-                                                        .replace("%playerdisplayname%", player.getDisplayName())));
-                                    } else {
-                                        event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Join Message"))
-                                                .replace("%player%", player.getName()
-                                                        .replace("%playerdisplayname%", player.getDisplayName()))));
-                                    }
-                                }
-                            }
-                        } else {
-                        if (!JoinPlugin.mc116() || !JoinPlugin.mc117()) {
-                            event.setQuitMessage(Ucolor.colorize(idSection.getString("Join Message"))
-                                    .replace("%player%", player.getName()                           /* If essentials doesn't work send this instead. */
-                                            .replace("%playerdisplayname%", player.getDisplayName())));
-                        } else {
-                            event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Join Message"))
-                                    .replace("%player%", player.getName()
-                                            .replace("%playerdisplayname%", player.getDisplayName()))));
-                        }
-                    }
-
-                            event.setQuitMessage(Ucolor.colorize(idSection.getString("Quit Message").replace("%player%", player.getName().replace("%playerdisplayname%", player.getDisplayName()))));
-
-                            for (String s : idSection.getStringList("commands")) {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s.replace("%player%", player.getName()));
-                            }
-                        }
+                    } else {
+                        setCustomQuitMessage(event, player, idSection); // Perform this if essentials is enabled.
                     }
                 }
+
+                setCustomQuitMessage(event, player, idSection);  // Perform this if essentials is disabled.
+
             }
         }
     }
+
+    /**
+     * Set the quit message to a custom one and support Hex Colors and Placeholders.
+     * Use in this class only to avoid confusion.
+     *
+     * @param event     The player join event.
+     * @param player    The player to send the message to.
+     * @param idSection The Configuration Section of the config.yml I.G: Groups:
+     */
+    private void setCustomQuitMessage(PlayerQuitEvent event, Player player, ConfigurationSection idSection) {
+
+        event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Quit Message"))
+                .replace("%player%", player.getName()
+                .replace("%playerdisplayname%", player.getDisplayName()))));
+
+    }
+}
 
 
 

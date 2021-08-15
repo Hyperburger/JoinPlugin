@@ -9,13 +9,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
+/**
+ * @author HyperBurger
+ */
+
 public final class JoinPlugin extends JavaPlugin {
 
-    /*
-     * @author HyperBurger
-     */
-
-    public static final double version = 2;
+    public static final double version = 2.2;
     public static Essentials essentials;
 
     @Override

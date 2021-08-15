@@ -4,13 +4,12 @@ import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 
 public class MaintenanceListener implements Listener {
 
-    private JoinPlugin plugin;
+    private final JoinPlugin plugin;
     public MaintenanceListener(JoinPlugin plugin){
         this.plugin = plugin;
     }

@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 public class CommandManager implements CommandExecutor {
 
-
-    private ArrayList<SubCommand> subCommands = new ArrayList<>();
-    private JoinPlugin plugin;
+    private final ArrayList<SubCommand> subCommands = new ArrayList<>();
+    public final JoinPlugin plugin;
 
     public CommandManager(JoinPlugin plugin){
         this.plugin = plugin;
@@ -64,7 +63,6 @@ public class CommandManager implements CommandExecutor {
                 return true;
             }
         }
-
         return true;
     }
 

@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
 
-    public JoinPlugin plugin;
+    private final JoinPlugin plugin;
     public JoinListener(JoinPlugin plugin) {
         this.plugin = plugin;
     }
@@ -40,14 +40,15 @@ public class JoinListener implements Listener {
 
                 // EssentialsX Vanish Support
                 if (config.getBoolean("SupportEssentialXVanish") && plugin.checkEssentials()) {
-                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {
+                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()){
                         event.setJoinMessage("");
+
                     } else {
                         setCustomJoinMessage(event, player, idSection); // Perform this if essentials is enabled.
                     }
-                } else {
-                    setCustomJoinMessage(event, player, idSection);  // Perform this if essentials is disabled.
                 }
+
+                setCustomJoinMessage(event, player, idSection);  // Perform this if essentials is disabled.
 
                 // Perform Sounds
                 for (Player allPlayers : Bukkit.getOnlinePlayers()) {

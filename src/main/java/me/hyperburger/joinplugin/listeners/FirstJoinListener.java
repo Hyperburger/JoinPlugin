@@ -11,29 +11,32 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class FirstJoinListener implements Listener {
 
-    public final JoinPlugin plugin;
+    private final JoinPlugin plugin;
     public FirstJoinListener (JoinPlugin plugin){
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onFirstJoin(PlayerJoinEvent event){
+    public void onFirstJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
         Configuration config = plugin.getConfig();
 
-        event.setJoinMessage(Ucolor.colorize(config.getString("First Join.Message"))
-                .replace("%player%", player.getName()
-                .replace("%playerdisplayname%", player.getDisplayName())));
+        if (!player.hasPlayedBefore()) {
 
-        // Perform Firework
-        if (config.getBoolean("First Join.Firework.Enabled")) {
-            Utilis.spawnFireworks(player.getLocation(), 1);
-        }
+            event.setJoinMessage(Ucolor.colorize(config.getString("First Join.Message"))
+                    .replace("%player%", player.getName()
+                            .replace("%playerdisplayname%", player.getDisplayName())));
 
-        // Perform Commands
-        for (String commands : config.getStringList("First Join.Commands")) {
-            Utilis.configCommand(commands, player);
+            // Perform Firework
+            if (config.getBoolean("First Join.Firework.Enabled")) {
+                Utilis.spawnFireworks(player.getLocation(), 1);
+            }
+
+            // Perform Commands
+            for (String commands : config.getStringList("First Join.Commands")) {
+                Utilis.configCommand(commands, player);
+            }
         }
     }
 }
