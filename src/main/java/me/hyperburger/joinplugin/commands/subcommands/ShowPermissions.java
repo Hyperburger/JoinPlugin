@@ -36,14 +36,13 @@ public class ShowPermissions extends SubCommand {
         permissions.add("joinplugin.command.displayservermotd");
         permissions.add("joinplugin.command.maintenance");
         permissions.add("joinplugin.command.permissions");
-        permissions.add("joinplugin.serverfull");
+        permissions.add("joinplugin.command.testgroup");
         permissions.add("joinplugin.command.reload");
-
+        permissions.add("joinplugin.serverfull");
 
         player.sendMessage(" ");
         player.sendMessage(Ucolor.colorize("    &5&m--------&d&l JOIN PLUGIN &fPermissions &5&m--------"));
         player.sendMessage(" ");
-
 
         for (String s : permissions){
             Ucolor.sendMessage(player, "&8[&3&l*&8] &f" + s.toLowerCase());
