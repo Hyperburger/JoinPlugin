@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class JoinPlugin extends JavaPlugin {
 
-    public static final double version = 2.2;
+    public static final double version = 2.3;
     public static Essentials essentials;
 
     @Override
@@ -31,6 +31,7 @@ public final class JoinPlugin extends JavaPlugin {
 
         registerEvents();
         registerCommands();
+
     }
 
     public void registerEvents(){
