@@ -76,8 +76,8 @@ public class JoinListener implements Listener {
         // Perform Titles
         if (!JoinPlugin.mc18()) {       //TODO: Titles for 1.8
             if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
-                player.sendTitle(config.getString("Join Title.Title"),
-                        config.getString("Join Title.SubTitle"),
+                player.sendTitle(Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.Title"))),
+                        Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.SubTitle"))),
                         config.getInt("Join Title.fadeIn"),
                         config.getInt("Join Title.Stay"),
                         config.getInt("Join Title.fadeOut"));
