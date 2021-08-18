@@ -78,9 +78,9 @@ public class JoinListener implements Listener {
             if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
                 player.sendTitle(Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.Title"))),
                         Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.SubTitle"))),
-                        config.getInt("Join Title.fadeIn"),
-                        config.getInt("Join Title.Stay"),
-                        config.getInt("Join Title.fadeOut"));
+                        config.getInt("Join Title.fadeIn") * 20,
+                        config.getInt("Join Title.Stay") * 20,
+                        config.getInt("Join Title.fadeOut") * 20);
             }
         }
     }
