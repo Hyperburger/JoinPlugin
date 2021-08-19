@@ -60,7 +60,7 @@ MOTD:
 Join Title: # Titles for when the player joins.
   Enabled: true
   Title: "&c&lWELCOME"
-  SubTitle: "&fChào Mừng Nhà Thám Hiểm"
+  SubTitle: "&c&lWELCOME"
   fadeIn: 3 #Seconds
   Stay: 5 #Seconds
   fadeOut: 3 #Seconds
