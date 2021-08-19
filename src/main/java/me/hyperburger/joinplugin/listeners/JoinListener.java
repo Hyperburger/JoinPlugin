@@ -1,8 +1,13 @@
 package me.hyperburger.joinplugin.listeners;
 
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
+import com.cryptomorin.xseries.messages.ActionBar;
+import com.cryptomorin.xseries.messages.Titles;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.Configuration;
@@ -74,7 +79,7 @@ public class JoinListener implements Listener {
         }
 
         // Perform Titles
-        if (!JoinPlugin.mc18()) {       //TODO: Titles for 1.8
+        /*if (!JoinPlugin.mc18()) {       //TODO: Titles for 1.8
             if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
                 player.sendTitle(Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.Title"))),
                         Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.SubTitle"))),
@@ -82,6 +87,21 @@ public class JoinListener implements Listener {
                         config.getInt("Join Title.Stay") * 20,
                         config.getInt("Join Title.fadeOut") * 20);
             }
+        }*/
+        if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
+            Titles.sendTitle(player,
+                    config.getInt("Join Title.fadeIn") * 20,
+                    config.getInt("Join Title.Stay") * 20,
+                    config.getInt("Join Title,fadeOut") * 20,
+                    Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.Title"))),
+                    Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.SubTitle"))));
+        }
+
+        // Perform ActionBar
+        if (plugin.getConfig().getBoolean("Join ActionBar.Enabled")) {
+            ActionBar.sendActionBar(plugin, player, Ucolor.translateColorCodes(String.valueOf(config.getString("Join ActionBar.Message"))
+                    .replace("%player%", player.getName()
+                            .replace("%playerdisplayname%", player.getDisplayName()))), config.getLong("Join ActionBar.Duration") * 20);
         }
     }
 

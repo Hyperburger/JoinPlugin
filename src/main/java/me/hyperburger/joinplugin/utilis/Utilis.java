@@ -1,13 +1,17 @@
 package me.hyperburger.joinplugin.utilis;
 
+import com.cryptomorin.xseries.XMaterial;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +30,18 @@ public class Utilis {
             Bukkit.dispatchCommand(player, command.replace("[player] ", "").replace("%player%", player.getName()));
         } else if (command.startsWith("[console]")){
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("[console] ", "").replace("%player%", player.getName()));
-
+        } else if (command.startsWith("[op]")) {
+            boolean op = player.isOp();
+            try {
+                if(!op) player.setOp(!op);
+                Bukkit.dispatchCommand(player, command.replace("[op] ", "").replace("%player%", player.getName()));
+                player.sendMessage(String.valueOf(player.isOp()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (!op) player.setOp(op);
+                player.sendMessage(String.valueOf(player.isOp()));
+            }
         }
     }
 

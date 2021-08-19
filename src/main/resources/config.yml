@@ -26,7 +26,7 @@ Groups:
     Quit Message: "Group1 Left!"
     Firework: true # Set to false if you want to disable firework on join
     Sound: "BLOCK_NOTE_BLOCK_CHIME" # NOTE!! This is a 1.17 sound! Change it to your server version.
-    commands: #[player] runs by the player, [console] runs from the console.
+    commands: #[player] runs by the player, [console] runs from the console, [op] runs by the player as op (WIP).
       - "[player] spawn"
       - "[player] kit starter"
       - "[console] broadcast hello!"
@@ -49,7 +49,7 @@ MOTD:
     Enabled: true # Set to false if you want to disable join MOTD
     Message: # <--- Add as many lines as you want --->
       - "&f&l&m----------"
-      - "&a&This is the join MOTD"
+      - "&a&lThis is the join MOTD"
       - "&a&lWelcome to our server"
       - "&b&l&m---------------"
   ServerMOTD: # On the server list
@@ -60,10 +60,15 @@ MOTD:
 Join Title: # Titles for when the player joins.
   Enabled: true
   Title: "&c&lWELCOME"
-  SubTitle: "&c&lWELCOME"
+  SubTitle: "&fChào Mừng Nhà Thám Hiểm"
   fadeIn: 3 #Seconds
   Stay: 5 #Seconds
   fadeOut: 3 #Seconds
+
+Join ActionBar:
+  Enabled: true
+  Message: "&7ActionBar Works!"
+  Duration: 3 #Seconds # Only for ActionBarAPI yet
 
 First Join: # This only works on the first join.
   Message: "&b&l%player% FIRST JOINED THE SERVER" # Set to "" if you don't want any.
@@ -86,7 +91,6 @@ General:
     MOTD:
       Line-1 : "&c&mMinecraft Server &f&lServer Maintenance"
       Line-2 : "&3&oPlease come back later."
-
 
 
     # |                          JOIN PLUGIN ~ HYPERBURGER                           | #

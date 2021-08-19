@@ -24,6 +24,5 @@ public class Menu extends SubCommand {
     @Override
     public void perform(Player player, String[] args, Plugin plugin) {
 
-
     }
 }
