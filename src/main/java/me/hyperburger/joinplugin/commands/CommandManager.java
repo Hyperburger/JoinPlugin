@@ -26,8 +26,8 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new Menu());
         subCommands.add(new WhiteList());
         subCommands.add(new SetMaxPlayers());
-        subCommands.add(new TestTitle());
-        subCommands.add(new TestActionbar(plugin));
+        subCommands.add(new DisplayJoinTitle());
+        subCommands.add(new DisplayJoinActionbar(plugin));
         subCommands.add(new TestGroup());
         subCommands.add(new ReloadCommand());
     }

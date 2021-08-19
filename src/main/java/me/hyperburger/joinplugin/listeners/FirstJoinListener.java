@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin.listeners;
 
 import me.hyperburger.joinplugin.JoinPlugin;
+import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
 import org.bukkit.configuration.Configuration;
@@ -24,9 +25,9 @@ public class FirstJoinListener implements Listener {
 
         if (!player.hasPlayedBefore()) {
 
-            event.setJoinMessage(Ucolor.colorize(config.getString("First Join.Message"))
+            event.setJoinMessage(Ucolor.translateColorCodes(Placeholders.replace(player, config.getString("First Join.Message"))
                     .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName())));
+                            .replace("%playerdisplayname%", player.getDisplayName()))));
 
             // Perform Firework
             if (config.getBoolean("First Join.Firework.Enabled")) {

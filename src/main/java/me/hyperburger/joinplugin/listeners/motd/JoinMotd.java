@@ -2,6 +2,7 @@ package me.hyperburger.joinplugin.listeners.motd;
 
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.DefaultFontInfo;
+import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,13 +59,13 @@ public class JoinMotd implements Listener {
                             }
                             returnMessage.append(sb.toString()).append(line).append("\n");
                         }
-                        Ucolor.sendMessage(player, returnMessage.toString()
+                        Ucolor.sendMessage(player, Placeholders.replace(player, returnMessage.toString()
                                 .replace("%player%", player.getName()
-                                        .replace("%playerdisplayname%", player.getDisplayName())));
+                                        .replace("%playerdisplayname%", player.getDisplayName()))));
                     } else {
-                        Ucolor.sendMessage(player, joinMotdMessages
+                        Ucolor.sendMessage(player, Placeholders.replace(player, joinMotdMessages
                                 .replace("%player%", player.getName()
-                                        .replace("%playerdisplayname%", player.getDisplayName())));
+                                        .replace("%playerdisplayname%", player.getDisplayName()))));
                     }
                 }
             }
@@ -105,13 +106,13 @@ public class JoinMotd implements Listener {
                             }
                             returnMessage.append(sb.toString()).append(line).append("\n");
                         }
-                        Ucolor.sendMessage(player, returnMessage.toString()
+                        Ucolor.sendMessage(player, Placeholders.replace(player, returnMessage.toString()
                                 .replace("%player%", player.getName()
-                                        .replace("%playerdisplayname%", player.getDisplayName())));
+                                        .replace("%playerdisplayname%", player.getDisplayName()))));
                     } else {
-                        Ucolor.sendMessage(player, s
+                        Ucolor.sendMessage(player, Placeholders.replace(player, s
                                 .replace("%player%", player.getName()
-                                        .replace("%playerdisplayname%", player.getDisplayName())));
+                                        .replace("%playerdisplayname%", player.getDisplayName()))));
                     }
                 }
             }

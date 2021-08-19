@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin.listeners;
 
 import me.hyperburger.joinplugin.JoinPlugin;
+import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
@@ -60,9 +61,9 @@ public class QuitListener implements Listener {
      */
     private void setCustomQuitMessage(PlayerQuitEvent event, Player player, ConfigurationSection idSection) {
 
-        event.setQuitMessage(Ucolor.translateColorCodes(String.valueOf(idSection.getString("Quit Message"))
+        event.setQuitMessage(Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(idSection.getString("Quit Message"))
                 .replace("%player%", player.getName()
-                .replace("%playerdisplayname%", player.getDisplayName()))));
+                .replace("%playerdisplayname%", player.getDisplayName())))));
 
     }
 }

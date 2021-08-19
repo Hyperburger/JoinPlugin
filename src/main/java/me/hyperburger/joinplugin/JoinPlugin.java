@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin;
 
 import com.earth2me.essentials.Essentials;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.hyperburger.joinplugin.commands.CommandManager;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
