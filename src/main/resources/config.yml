@@ -68,7 +68,19 @@ Join Title: # Titles for when the player joins.
 Join ActionBar:
   Enabled: true
   Message: "&7ActionBar Works!"
-  Duration: 3 #Seconds # Only for ActionBarAPI yet
+  Duration: 3 #Seconds
+
+Join BossBar:
+  Enabled: true
+  Message: "&fBossBar Work!"
+  Duration: 3 # Seconds
+  # Style of the bossbar, can be solid, or segmented.
+  # Possible styles: "SOLID", "SEGMENTED_6", "SEGMENTED_10", "SEGMENTED_12", "SEGMENTED_20"
+  # See at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html
+  Style: "SOLID"
+  # Possible colors: "BLUE", "GREEN", "PINK", "PURPLE", "RED", "WHITE", "YELLOW" <- YOU CAN ONLY USE THESE COLORS!!!
+  # See at: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+  Color: "PURPLE"
 
 First Join: # This only works on the first join.
   Message: "&b&l%player% FIRST JOINED THE SERVER" # Set to "" if you don't want any.

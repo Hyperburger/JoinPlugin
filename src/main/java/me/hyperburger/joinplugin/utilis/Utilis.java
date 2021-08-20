@@ -1,17 +1,20 @@
 package me.hyperburger.joinplugin.utilis;
 
-import com.cryptomorin.xseries.XMaterial;
+import me.hyperburger.joinplugin.JoinPlugin;
 import org.bukkit.*;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -107,5 +110,19 @@ public class Utilis {
             Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
             fw2.setFireworkMeta(fwm);
         }
+    }
+
+    static Plugin plugin = JoinPlugin.getPlugin(JoinPlugin.class);
+
+    public static void sendBossbar(Player player, String s, int duration, String style, String color) {
+        BarColor barColor = BarColor.valueOf(color);
+        BarStyle barStyle = BarStyle.valueOf(style);
+        BossBar bossBar = Bukkit.getServer().createBossBar(s, barColor, barStyle);
+        bossBar.addPlayer(player);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            public void run() {
+                bossBar.removePlayer(player);
+            }
+        }, (long)duration * 10L);
     }
 }

@@ -1,7 +1,6 @@
 package me.hyperburger.joinplugin.commands.subcommands;
 
 import com.cryptomorin.xseries.messages.ActionBar;
-import com.cryptomorin.xseries.messages.Titles;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.commands.SubCommand;
 import me.hyperburger.joinplugin.utilis.Placeholders;
@@ -33,7 +32,7 @@ public class DisplayJoinActionbar extends SubCommand {
         if (player.hasPermission("joinplugin.command.displayjoinactionbar")) {
             ActionBar.sendActionBar(joinplugin, player, Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join ActionBar.Message"))
                     .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20);
+                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20L);
         } else {
             Ucolor.NOPERM(player, "joinplugin.command.displayjoinactionbar");
         }

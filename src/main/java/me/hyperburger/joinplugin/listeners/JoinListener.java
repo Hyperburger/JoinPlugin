@@ -99,7 +99,16 @@ public class JoinListener implements Listener {
         if (plugin.getConfig().getBoolean("Join ActionBar.Enabled")) {
             ActionBar.sendActionBar(plugin, player, Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join ActionBar.Message"))
                     .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20);
+                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20L);
+        }
+
+        // Perform BossBar
+        if (plugin.getConfig().getBoolean("Join BossBar.Enabled")) {
+            Utilis.sendBossbar(player,
+                    Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join BossBar.Message")))),
+                    config.getInt("Join BossBar.Duration"),
+                    config.getString("Join BossBar.Style"),
+                    config.getString("Join BossBar.Color"));
         }
     }
 
