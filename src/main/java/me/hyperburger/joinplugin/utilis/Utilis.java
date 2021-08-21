@@ -111,18 +111,4 @@ public class Utilis {
             fw2.setFireworkMeta(fwm);
         }
     }
-
-    static Plugin plugin = JoinPlugin.getPlugin(JoinPlugin.class);
-
-    public static void sendBossbar(Player player, String s, int duration, String style, String color) {
-        BarColor barColor = BarColor.valueOf(color);
-        BarStyle barStyle = BarStyle.valueOf(style);
-        BossBar bossBar = Bukkit.getServer().createBossBar(s, barColor, barStyle);
-        bossBar.addPlayer(player);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            public void run() {
-                bossBar.removePlayer(player);
-            }
-        }, (long)duration * 10L);
-    }
 }

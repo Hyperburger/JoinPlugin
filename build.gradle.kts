@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.hyperburger"
-version = "2.3"
+version = "2.4"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -21,6 +21,7 @@ repositories {
     mavenLocal()
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
+    // PlaceholderAPI
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.minebench.de/")
 }
@@ -33,4 +34,5 @@ dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("com.github.cryptomorin:XSeries:8.3.0")
     compileOnly(fileTree("libs/compile"))
+    implementation(fileTree("libs/implement"))
 }

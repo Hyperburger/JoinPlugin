@@ -1,9 +1,11 @@
 name: JoinPlugin
-version: ${project.version}
+version: 2.3
 main: me.hyperburger.joinplugin.JoinPlugin
 api-version: 1.13
 authors: [ HyperBurger ]
 description: A Custom Coded Join Plugin
+softdepend:
+  - PlaceholderAPI
 commands:
   JoinPlugin:
     description: JoinPlugin Main Command

@@ -6,6 +6,7 @@ import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
+import me.hyperburger.joinplugin.utilis.bossbar.BossBar;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.Configuration;
@@ -77,15 +78,6 @@ public class JoinListener implements Listener {
         }
 
         // Perform Titles
-        /*if (!JoinPlugin.mc18()) {       //TODO: Titles for 1.8
-            if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
-                player.sendTitle(Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.Title"))),
-                        Ucolor.translateColorCodes(String.valueOf(config.getString("Join Title.SubTitle"))),
-                        config.getInt("Join Title.fadeIn") * 20,
-                        config.getInt("Join Title.Stay") * 20,
-                        config.getInt("Join Title.fadeOut") * 20);
-            }
-        }*/
         if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
             Titles.sendTitle(player,
                     config.getInt("Join Title.fadeIn") * 20,
@@ -104,7 +96,7 @@ public class JoinListener implements Listener {
 
         // Perform BossBar
         if (plugin.getConfig().getBoolean("Join BossBar.Enabled")) {
-            Utilis.sendBossbar(player,
+            BossBar.sendBossbar(player,
                     Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join BossBar.Message")))),
                     config.getInt("Join BossBar.Duration"),
                     config.getString("Join BossBar.Style"),
@@ -121,7 +113,6 @@ public class JoinListener implements Listener {
      * @param idSection The Configuration Section of the config.yml I.G: Groups:
      */
     private void setCustomJoinMessage(PlayerJoinEvent event, Player player, ConfigurationSection idSection) {
-
         event.setJoinMessage(Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(idSection.getString("Join Message"))
                 .replace("%player%", player.getName()
                 .replace("%playerdisplayname%", player.getDisplayName())))));

@@ -1,12 +1,18 @@
 package me.hyperburger.joinplugin;
 
 import com.earth2me.essentials.Essentials;
+import featherpowders.FeatherPowders;
+import featherpowders.implementations.Implementations;
+import featherpowders.implementations.events.InventoryEventsHandler;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.hyperburger.joinplugin.commands.CommandManager;
+import me.hyperburger.joinplugin.events.ChatEventsHandler;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
 import me.hyperburger.joinplugin.listeners.motd.ServerMOTD;
+import me.hyperburger.joinplugin.menu.MenuGUI;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +38,6 @@ public final class JoinPlugin extends JavaPlugin {
 
         registerEvents();
         registerCommands();
-
     }
 
     public void registerEvents(){
@@ -44,12 +49,13 @@ public final class JoinPlugin extends JavaPlugin {
         pluginManager.registerEvents(new QuitListener(this), this);
         pluginManager.registerEvents(new MaintenanceListener(this), this);
         pluginManager.registerEvents(new ServerMOTD(this),this);
+        pluginManager.registerEvents(new InventoryEventsHandler(), this);
+        pluginManager.registerEvents(new ChatEventsHandler(this), this);
     }
 
     public void registerCommands(){
         this.getCommand("joinplugin").setExecutor(new CommandManager(this));
     }
-
 
     public boolean checkEssentials(){
         if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
