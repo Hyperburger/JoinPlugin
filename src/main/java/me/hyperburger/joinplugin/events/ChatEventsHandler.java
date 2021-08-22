@@ -3,6 +3,8 @@ package me.hyperburger.joinplugin.events;
 import featherpowders.ui.PlayerUI;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.JoinPluginHelper;
+import me.hyperburger.joinplugin.menu.MenuGUI;
+import me.hyperburger.joinplugin.messages.MessageType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,7 +42,7 @@ public class ChatEventsHandler implements Listener {
                 try {
                     value = Double.parseDouble(message);
                 } catch (NumberFormatException e) {
-                    player.sendMessage("§cInvalid input, offer canceled");
+                    player.sendMessage("§cInvalid input, set max player canceled");
                     JoinPluginHelper.clearPlayerMarking(player);
                     return;
                 }
@@ -56,6 +58,27 @@ public class ChatEventsHandler implements Listener {
                 plugin.getConfig().set("MOTD.MaxPlayers.MaxPlayers", Integer.parseInt(String.valueOf(players)));
                 plugin.saveConfig();
                 player.sendMessage("§8[§5JoinPlugin§8]§d Max player set to " + players);
+                PlayerUI.openUI(player, new MenuGUI(player, players));
+                JoinPluginHelper.clearPlayerMarking(player);
+            });
+        }
+        if (JoinPluginHelper.messageSet.containsKey(player.getUniqueId())) {
+            event.setCancelled(true);
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(JoinPlugin.class), () -> {
+                if (message.equalsIgnoreCase("cancel")) {
+                    player.sendMessage("§cSet max player canceled");
+                    JoinPluginHelper.clearPlayerMarking(player);
+                    return;
+                }
+
+                MessageType type = JoinPluginHelper.messageSet.get(player.getUniqueId());
+                if (type == MessageType.JOIN_MESSAGE) {
+
+                }
+                if (type == MessageType.LEAVE_MESSAGE) {
+
+                }
             });
         }
     }

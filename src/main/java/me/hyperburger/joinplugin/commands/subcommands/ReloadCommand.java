@@ -1,5 +1,6 @@
 package me.hyperburger.joinplugin.commands.subcommands;
 
+import com.cryptomorin.xseries.messages.Titles;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.commands.SubCommand;
 import me.hyperburger.joinplugin.utilis.Ucolor;
@@ -28,9 +29,7 @@ public class ReloadCommand extends SubCommand {
         if (player.hasPermission("joinplugin.command.reload")) {
             Ucolor.sendMessage(player, "&a&lConfig Successfully Reloaded!");
             plugin.reloadConfig();
-            if (!JoinPlugin.mc18()) {
-                player.sendTitle(Ucolor.colorize("&a&lConfig"), Ucolor.colorize("&a&lSuccessfully Reloaded!"), 20, 2 * 20, 20);
-            }
+            Titles.sendTitle(player, 20, 2 * 20, 20, Ucolor.colorize("&a&lConfig"), Ucolor.colorize("&a&lSuccessfully Reloaded!"));
         } else {
             Ucolor.NOPERM(player, "joinplugin.command.reload");
         }

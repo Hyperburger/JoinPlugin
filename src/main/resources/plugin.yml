@@ -1,8 +1,8 @@
 name: JoinPlugin
-version: 2.3
+version: 2.4
 main: me.hyperburger.joinplugin.JoinPlugin
 api-version: 1.13
-authors: [ HyperBurger ]
+authors: [ HyperBurger, GalaxyVN ]
 description: A Custom Coded Join Plugin
 softdepend:
   - PlaceholderAPI

@@ -34,7 +34,11 @@ public class ShowPermissions extends SubCommand {
         permissions.add("joinplugin.command.whitelist");
         permissions.add("joinplugin.command.maxplayers");
         permissions.add("joinplugin.command.displayservermotd");
+        permissions.add("joinplugin.command.displayjoinactionbar");
+        permissions.add("joinplugin.command.displayjoinbossbar");
+        permissions.add("joinplugin.command.displayjointitle");
         permissions.add("joinplugin.command.maintenance");
+        permissions.add("joinplugin.command.menu");
         permissions.add("joinplugin.command.permissions");
         permissions.add("joinplugin.command.testgroup");
         permissions.add("joinplugin.command.reload");
