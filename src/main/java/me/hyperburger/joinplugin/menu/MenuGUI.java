@@ -36,18 +36,26 @@ public class MenuGUI extends ChestUI {
                             "",
                             "§7Current max player: " + JoinPlugin.getPlugin(JoinPlugin.class).getConfig().getString("MOTD.MaxPlayers.MaxPlayers"),
                             "",
-                            "§7Click to§e set!")
-                    .getItem(), event -> {
+                            "§8➥ [§3Left-Click] §7Click to§e set!",
+                            "§8➥ [§3Right-Click] §7Click to turn§c off!"
+                            ).getItem(), event -> {
                 event.setCancelled(true);
                 setCancelDragEvent(true);
-                player.closeInventory();
-                player.sendMessage(new String[] {
-                        "",
-                        "§7Please type in chat how much player can in server",
-                        "§7Type §ccancel §7to cancel",
-                        ""
-                });
-                JoinPluginHelper.maxPlayers.put(player.getUniqueId(), players);
+                if (event.isLeftClick()) {
+                    player.closeInventory();
+                    player.sendMessage(new String[]{
+                            "",
+                            "§7Please type in chat how much player can in server",
+                            "§7Type §ccancel §7to cancel",
+                            ""
+                    });
+                    JoinPluginHelper.maxPlayers.put(player.getUniqueId(), players);
+                }
+                if (event.isRightClick()) {
+                    player.closeInventory();
+                    config.set("MOTD.MaxPlayers.Enabled", false);
+                    Ucolor.sendMessage(player, "&8[&5JoinPlugin&8]&d Max Players Disabled");
+                }
             });
         } else {
             set(1, 1, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/3ed1aba73f639f4bc42bd48196c715197be2712c3b962c97ebf9e9ed8efa025"))
@@ -57,8 +65,15 @@ public class MenuGUI extends ChestUI {
                             "§7You are current disabled",
                             "§7this feature, please consider",
                             "§7turn on it to use this item!",
-                            ""
-                    ).getItem(), null);
+                            "",
+                            "§7Click to turn§a on!"
+                    ).getItem(), event -> {
+                event.setCancelled(true);
+                setCancelDragEvent(true);
+                player.closeInventory();
+                config.set("MOTD.MaxPlayers.Enabled", true);
+                Ucolor.sendMessage(player, "&8[&5JoinPlugin&8]&d Max Players Enabled");
+            });
         }
         set(5, 1, new ItemBuilder(XMaterial.PAPER.parseMaterial(), 1)
                 .name("§eDisplay Join MOTD")
