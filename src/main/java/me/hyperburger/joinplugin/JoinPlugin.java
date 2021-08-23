@@ -1,18 +1,13 @@
 package me.hyperburger.joinplugin;
 
 import com.earth2me.essentials.Essentials;
-import featherpowders.FeatherPowders;
-import featherpowders.implementations.Implementations;
 import featherpowders.implementations.events.InventoryEventsHandler;
-import me.clip.placeholderapi.PlaceholderAPI;
 import me.hyperburger.joinplugin.commands.CommandManager;
 import me.hyperburger.joinplugin.events.ChatEventsHandler;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
 import me.hyperburger.joinplugin.listeners.motd.ServerMOTD;
-import me.hyperburger.joinplugin.menu.MenuGUI;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -69,7 +64,7 @@ public final class JoinPlugin extends JavaPlugin {
             System.out.println("  ------------(Join Plugin)------------  ");
             System.out.println(" ");
             System.out.println("    JoinPlugin: Successfully Loaded!");
-            System.out.println("    Author: HyperBurger");
+            System.out.println("    Author: HyperBurger, GalaxyVN");
             System.out.println("    version = " + version);
             System.out.println(" ");
             System.out.println("  -------------------------------------  ");

@@ -26,7 +26,7 @@ public class DisplayJoinTitle extends SubCommand {
             Titles.sendTitle(player,
                     config.getInt("Join Title.fadeIn") * 20,
                     config.getInt("Join Title.Stay") * 20,
-                    config.getInt("Join Title,fadeOut") * 20,
+                    config.getInt("Join Title.fadeOut") * 20,
                     Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join Title.Title")))),
                     Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join Title.SubTitle")))));
         } else {

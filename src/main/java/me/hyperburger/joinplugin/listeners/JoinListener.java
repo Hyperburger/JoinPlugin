@@ -82,7 +82,7 @@ public class JoinListener implements Listener {
             Titles.sendTitle(player,
                     config.getInt("Join Title.fadeIn") * 20,
                     config.getInt("Join Title.Stay") * 20,
-                    config.getInt("Join Title,fadeOut") * 20,
+                    config.getInt("Join Title.fadeOut") * 20,
                     Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join Title.Title")))),
                     Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join Title.SubTitle")))));
         }
@@ -91,7 +91,7 @@ public class JoinListener implements Listener {
         if (plugin.getConfig().getBoolean("Join ActionBar.Enabled")) {
             ActionBar.sendActionBar(plugin, player, Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join ActionBar.Message"))
                     .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20L);
+                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getInt("Join ActionBar.Duration") * 10L);
         }
 
         // Perform BossBar

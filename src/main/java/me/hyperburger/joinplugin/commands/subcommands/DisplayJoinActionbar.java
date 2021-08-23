@@ -32,7 +32,7 @@ public class DisplayJoinActionbar extends SubCommand {
         if (player.hasPermission("joinplugin.command.displayjoinactionbar")) {
             ActionBar.sendActionBar(joinplugin, player, Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(config.getString("Join ActionBar.Message"))
                     .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getLong("Join ActionBar.Duration") * 20L);
+                            .replace("%playerdisplayname%", player.getDisplayName())))), config.getInt("Join ActionBar.Duration") * 10L);
         } else {
             Ucolor.NOPERM(player, "joinplugin.command.displayjoinactionbar");
         }
