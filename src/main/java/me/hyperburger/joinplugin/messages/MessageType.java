@@ -2,6 +2,7 @@ package me.hyperburger.joinplugin.messages;
 
 public enum MessageType {
     CREATE_GROUP,
+    CREATE_GROUP_COMMANDS,
     GROUP_PERMISSION,
     // Message
     JOIN_MESSAGE,

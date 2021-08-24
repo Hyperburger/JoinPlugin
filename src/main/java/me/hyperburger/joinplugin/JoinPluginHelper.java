@@ -52,6 +52,11 @@ public class JoinPluginHelper {
         messageSet.put(player.getUniqueId(), MessageType.CREATE_GROUP);
     }
 
+    // Create Group Command
+    public static void markCreateGroupCommand(Player player) {
+        messageSet.put(player.getUniqueId(), MessageType.CREATE_GROUP_COMMANDS);
+    }
+
     // Permission
     public static void markGroupPermissionSet(Player player, String groups) {
         messageSet.put(player.getUniqueId(), MessageType.GROUP_PERMISSION);

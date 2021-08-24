@@ -6,6 +6,8 @@ authors: [ HyperBurger, GalaxyVN ]
 description: A Custom Coded Join Plugin
 softdepend:
   - PlaceholderAPI
+  - SuperVanish
+  - PremiumVanish
 commands:
   JoinPlugin:
     description: JoinPlugin Main Command

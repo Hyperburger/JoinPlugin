@@ -2,6 +2,7 @@ package me.hyperburger.joinplugin.listeners;
 
 import com.cryptomorin.xseries.messages.ActionBar;
 import com.cryptomorin.xseries.messages.Titles;
+import de.myzelyam.api.vanish.VanishAPI;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
@@ -49,6 +50,15 @@ public class JoinListener implements Listener {
 
                     } else {
                         setCustomJoinMessage(event, player, idSection); // Perform this if essentials is enabled.
+                    }
+                }
+
+                if (config.getBoolean("SupportPluginVanish") && plugin.checkPluginVanish()) {
+                    if (VanishAPI.isInvisible(player)) {
+                        event.setJoinMessage("");
+
+                    } else {
+                        setCustomJoinMessage(event, player, idSection); // Perform this if premiumvanish|supervanish is enabled.
                     }
                 }
 

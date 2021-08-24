@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin;
 
 import com.earth2me.essentials.Essentials;
+import de.myzelyam.api.vanish.VanishAPI;
 import featherpowders.implementations.events.InventoryEventsHandler;
 import me.hyperburger.joinplugin.commands.CommandManager;
 import me.hyperburger.joinplugin.events.ChatEventsHandler;
@@ -30,6 +31,7 @@ public final class JoinPlugin extends JavaPlugin {
 
         startMsg();
         checkEssentials();
+        checkPluginVanish();
 
         registerEvents();
         registerCommands();
@@ -55,6 +57,13 @@ public final class JoinPlugin extends JavaPlugin {
     public boolean checkEssentials(){
         if (this.getServer().getPluginManager().getPlugin("Essentials") != null){
             essentials = (Essentials) this.getServer().getPluginManager().getPlugin("Essentials");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkPluginVanish() {
+        if (this.getServer().getPluginManager().getPlugin("PremiumVanish") != null || this.getServer().getPluginManager().getPlugin("SuperVanish") != null) {
             return true;
         }
         return false;

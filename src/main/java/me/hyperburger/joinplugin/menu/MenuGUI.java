@@ -216,6 +216,17 @@ public class MenuGUI extends ChestUI {
             JoinPlugin.getPlugin(JoinPlugin.class).reloadConfig();
             Titles.sendTitle(player, 20, 2 * 20, 20, Ucolor.colorize("&a&lConfig"), Ucolor.colorize("&a&lSuccessfully Reloaded!"));
         });
+        set(3, 2, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/91f26c21cbe1f3e5882ec59501e50c552757f81829c65c3fc4321055ae56d21c"))
+                .name("§aMenu Sounds")
+                .lore(
+                        "",
+                        "§7Open the",
+                        "§7list sounds!",
+                        "",
+                        "§7Click to§e open"
+                ).getItem(), event -> {
+            PlayerUI.openUI(player, new MenuSounds(player, this));
+        });
     }
 
     @Override
