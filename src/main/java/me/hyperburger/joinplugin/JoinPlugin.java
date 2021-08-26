@@ -1,14 +1,17 @@
 package me.hyperburger.joinplugin;
 
 import com.earth2me.essentials.Essentials;
-import de.myzelyam.api.vanish.VanishAPI;
 import featherpowders.implementations.events.InventoryEventsHandler;
 import me.hyperburger.joinplugin.commands.CommandManager;
 import me.hyperburger.joinplugin.events.ChatEventsHandler;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
 import me.hyperburger.joinplugin.listeners.motd.ServerMOTD;
+import me.hyperburger.joinplugin.manager.FileManager;
+import me.hyperburger.joinplugin.utilis.discord.Discord;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,10 +27,12 @@ public final class JoinPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new Metrics(this, 12590);
 
-        this.getConfig().options().copyDefaults(true);
         this.saveDefaultConfig();
         this.reloadConfig();
+
+        filemanager = new FileManager(this);
 
         startMsg();
         checkEssentials();
@@ -89,6 +94,10 @@ public final class JoinPlugin extends JavaPlugin {
         return Bukkit.getServer().getVersion().contains("1.17");
     }
 
+    private FileManager filemanager;
 
+    public FileManager getFileManager() {
+        return this.filemanager;
+    }
 
 }

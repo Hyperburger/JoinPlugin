@@ -1,10 +1,12 @@
 package me.hyperburger.joinplugin.listeners;
 
 import me.hyperburger.joinplugin.JoinPlugin;
+import me.hyperburger.joinplugin.manager.FileManager;
 import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,28 +27,35 @@ public class QuitListener implements Listener {
 
         Configuration config = plugin.getConfig();
         ConfigurationSection rewardSection = config.getConfigurationSection("Groups");
+        FileConfiguration data = plugin.getFileManager().getFileConfig(FileManager.Files.PLAYERS_CUSTOM);
 
         if (!config.getBoolean("Enable Join Message By Groups")) return;
         if (rewardSection == null) return;
 
-        for (String key : rewardSection.getKeys(false)) {
+        if (data.contains(player.getUniqueId().toString()) && data.getString(player.getUniqueId().toString() + ".Quit Message") != null) {
+            event.setQuitMessage(Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(data.getString(player.getUniqueId().toString() + ".Quit Message"))
+                    .replace("%player%", player.getName()
+                            .replace("%playerdisplayname%", player.getDisplayName())))));
+        } else {
+            for (String key : rewardSection.getKeys(false)) {
 
-            ConfigurationSection idSection = rewardSection.getConfigurationSection(key);     /* We now have idSection and can access it. */
-            String permission = idSection.getString("permission");
+                ConfigurationSection idSection = rewardSection.getConfigurationSection(key);     /* We now have idSection and can access it. */
+                String permission = idSection.getString("permission");
 
-            if (permission != null && player.hasPermission((permission))) {
+                if (permission != null && player.hasPermission((permission))) {
 
-                if (config.getBoolean("SupportEssentialXVanish") && plugin.checkEssentials()) {
-                    if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {
-                        event.setQuitMessage("");
+                    if (config.getBoolean("SupportEssentialXVanish") && plugin.checkEssentials()) {
+                        if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {
+                            event.setQuitMessage("");
 
-                    } else {
-                        setCustomQuitMessage(event, player, idSection); // Perform this if essentials is enabled.
+                        } else {
+                            setCustomQuitMessage(event, player, idSection); // Perform this if essentials is enabled.
+                        }
                     }
+
+                    setCustomQuitMessage(event, player, idSection);  // Perform this if essentials is disabled.
+
                 }
-
-                setCustomQuitMessage(event, player, idSection);  // Perform this if essentials is disabled.
-
             }
         }
     }
@@ -60,7 +69,6 @@ public class QuitListener implements Listener {
      * @param idSection The Configuration Section of the config.yml I.G: Groups:
      */
     private void setCustomQuitMessage(PlayerQuitEvent event, Player player, ConfigurationSection idSection) {
-
         event.setQuitMessage(Ucolor.translateColorCodes(Placeholders.replace(player, String.valueOf(idSection.getString("Quit Message"))
                 .replace("%player%", player.getName()
                 .replace("%playerdisplayname%", player.getDisplayName())))));

@@ -3,6 +3,7 @@ package me.hyperburger.joinplugin.commands;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.commands.subcommands.*;
 import me.hyperburger.joinplugin.utilis.Ucolor;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,6 +28,7 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new DisplayJoinBossBar());
         subCommands.add(new Maintenance());
         subCommands.add(new Menu());
+        subCommands.add(new CustomMessages());
         subCommands.add(new WhiteList());
         subCommands.add(new SetMaxPlayers());
         subCommands.add(new TestGroup());
@@ -36,7 +38,6 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-
             Player player = (Player) sender;
             if (player.hasPermission("joinplugin.view")) {
 
@@ -66,7 +67,7 @@ public class CommandManager implements CommandExecutor {
                 Ucolor.sendMessage(player, "&d&lJOIN PLUGIN &f&oBy HyperBurger");
                 return true;
             }
-        }
+        } else Bukkit.getLogger().warning("§cError while executing command: §fCannot using commands in console, But why doe?");
         return true;
     }
 

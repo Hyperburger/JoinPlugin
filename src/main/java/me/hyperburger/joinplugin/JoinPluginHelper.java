@@ -53,8 +53,36 @@ public class JoinPluginHelper {
     }
 
     // Create Group Command
-    public static void markCreateGroupCommand(Player player) {
+    public static void markCreateGroupCommand(Player player, String groups) {
         messageSet.put(player.getUniqueId(), MessageType.CREATE_GROUP_COMMANDS);
+        setOptions.put(player.getUniqueId(), new Object() {
+            HashMap<String, Object> parse() {
+                HashMap<String, Object> options = new HashMap<>();
+                options.put("Groups", groups);
+                return options;
+            }
+        }.parse());
+    }
+
+    public static void markEditGroupCommand(Player player, String groups, int index) {
+        messageSet.put(player.getUniqueId(), MessageType.EDIT_GROUP_COMMANDS);
+        setOptions.put(player.getUniqueId(), new Object() {
+            HashMap<String, Object> parse() {
+                HashMap<String, Object> options = new HashMap<>();
+                options.put("Groups", groups);
+                options.put("Index", index);
+                return options;
+            }
+        }.parse());
+    }
+
+    // Custom Join Leave Message
+    public static void markCustomJoinMessage(Player player) {
+        messageSet.put(player.getUniqueId(), MessageType.CUSTOM_JOIN_MESSAGE);
+    }
+
+    public static void markCustomLeaveMessage(Player player) {
+        messageSet.put(player.getUniqueId(), MessageType.CUSTOM_LEAVE_MESSAGE);
     }
 
     // Permission

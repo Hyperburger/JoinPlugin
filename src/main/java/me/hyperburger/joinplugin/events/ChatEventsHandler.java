@@ -3,11 +3,13 @@ package me.hyperburger.joinplugin.events;
 import featherpowders.ui.PlayerUI;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.JoinPluginHelper;
+import me.hyperburger.joinplugin.manager.FileManager;
 import me.hyperburger.joinplugin.menu.MenuGUI;
 import me.hyperburger.joinplugin.messages.MessageType;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ChatEventsHandler implements Listener {
 
@@ -103,6 +106,27 @@ public class ChatEventsHandler implements Listener {
                     player.sendMessage("§8[§5JoinPlugin§8]§d Join permission of group " + group +" have set to §f" + message);
                     JoinPluginHelper.clearPlayerMarking(player);
                 }
+                if(type == MessageType.CREATE_GROUP_COMMANDS) {
+                    HashMap<String, Object> options = (HashMap<String, Object>) JoinPluginHelper.setOptions.get(player.getUniqueId());
+                    String group = (String) options.get("Groups");
+                    List<String> commands = plugin.getConfig().getStringList("Groups." + group + ".commands");
+                    commands.add(message);
+                    plugin.getConfig().set("Groups." + group + ".commands", commands);
+                    plugin.saveConfig();
+                    player.sendMessage("§8[§5JoinPlugin§8]§d Join command of group " + group +" have been created §r" + Ucolor.translateColorCodes(message));
+                    JoinPluginHelper.clearPlayerMarking(player);
+                }
+                if(type == MessageType.EDIT_GROUP_COMMANDS) {
+                    HashMap<String, Object> options = (HashMap<String, Object>) JoinPluginHelper.setOptions.get(player.getUniqueId());
+                    String group = (String) options.get("Groups");
+                    int index = (int) options.get("Index");
+                    List<String> commands = plugin.getConfig().getStringList("Groups." + group + ".commands");
+                    commands.set(index, message);
+                    plugin.getConfig().set("Groups." + group + ".commands", commands);
+                    plugin.saveConfig();
+                    player.sendMessage("§8[§5JoinPlugin§8]§d Join command of group §r" + group + " at index: §r" + index + "§d have been set §r" + Ucolor.translateColorCodes(message));
+                    JoinPluginHelper.clearPlayerMarking(player);
+                }
                 if (type == MessageType.JOIN_MESSAGE) {
                     HashMap<String, Object> options = (HashMap<String, Object>) JoinPluginHelper.setOptions.get(player.getUniqueId());
                     String group = (String) options.get("Groups");
@@ -117,6 +141,20 @@ public class ChatEventsHandler implements Listener {
                     plugin.getConfig().set("Groups." + group + ".Leave Message", message);
                     plugin.saveConfig();
                     player.sendMessage("§8[§5JoinPlugin§8]§d Leave message of group " + group +" have set to §r" + Ucolor.translateColorCodes(message));
+                    JoinPluginHelper.clearPlayerMarking(player);
+                }
+                if (type == MessageType.CUSTOM_JOIN_MESSAGE) {
+                    FileConfiguration data = plugin.getFileManager().getFileConfig(FileManager.Files.PLAYERS_CUSTOM);
+                    data.set(player.getUniqueId().toString() + ".Join Message", message);
+                    plugin.getFileManager().saveFileConfig(data, FileManager.Files.PLAYERS_CUSTOM);
+                    player.sendMessage("§8[§5JoinPlugin§8]§d You custom join message have set to §r" + Ucolor.translateColorCodes(message));
+                    JoinPluginHelper.clearPlayerMarking(player);
+                }
+                if (type == MessageType.CUSTOM_LEAVE_MESSAGE) {
+                    FileConfiguration data = plugin.getFileManager().getFileConfig(FileManager.Files.PLAYERS_CUSTOM);
+                    data.set(player.getUniqueId().toString() + ".Quit Message", message);
+                    plugin.getFileManager().saveFileConfig(data, FileManager.Files.PLAYERS_CUSTOM);
+                    player.sendMessage("§8[§5JoinPlugin§8]§d You custom leave message have set to §r" + Ucolor.translateColorCodes(message));
                     JoinPluginHelper.clearPlayerMarking(player);
                 }
                 // Sound

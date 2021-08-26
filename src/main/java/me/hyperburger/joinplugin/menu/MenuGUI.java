@@ -23,7 +23,7 @@ public class MenuGUI extends ChestUI {
         Configuration config = JoinPlugin.getPlugin(JoinPlugin.class).getConfig();
 
         if (config.getBoolean("MOTD.MaxPlayers.Enabled")) {
-            set(1, 1, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/b114da6a7bcf475d3100aa93cbccc97db55f7b1afb537a59b5e075feab569ab5"))
+            set(5, 2, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/b114da6a7bcf475d3100aa93cbccc97db55f7b1afb537a59b5e075feab569ab5"))
                     .name("§eSet Max Players")
                     .lore(
                             "",
@@ -56,7 +56,7 @@ public class MenuGUI extends ChestUI {
                 }
             });
         } else {
-            set(1, 1, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/3ed1aba73f639f4bc42bd48196c715197be2712c3b962c97ebf9e9ed8efa025"))
+            set(5, 2, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/3ed1aba73f639f4bc42bd48196c715197be2712c3b962c97ebf9e9ed8efa025"))
                     .name("§eSet Max Players")
                     .lore(
                             "",
@@ -227,6 +227,9 @@ public class MenuGUI extends ChestUI {
                 ).getItem(), event -> {
             PlayerUI.openUI(player, new MenuSounds(player, this));
         });
+        set(1,1, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.getSkull(player.getUniqueId()).getItemMeta())
+                .name("§aManager Players Custom Message")
+                .getItem(), null);
     }
 
     @Override
