@@ -53,8 +53,7 @@ public class FileManager {
 
     public enum Files {
 
-        PLAYERS_CUSTOM("players.yml"),
-        ;
+        PLAYERS_CUSTOM("players.yml"),;
 
         private String location;
 

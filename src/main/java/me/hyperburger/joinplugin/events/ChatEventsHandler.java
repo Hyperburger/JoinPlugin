@@ -8,7 +8,6 @@ import me.hyperburger.joinplugin.menu.MenuGUI;
 import me.hyperburger.joinplugin.messages.MessageType;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,7 +35,6 @@ public class ChatEventsHandler implements Listener {
     }
 
     private void processEventAsync(AsyncPlayerChatEvent event, Player player, String message) {
-        ConfigurationSection rewardSection = plugin.getConfig().getConfigurationSection("Groups");
 
         if (JoinPluginHelper.maxPlayers.containsKey(player.getUniqueId())) {
             event.setCancelled(true);
@@ -94,6 +92,7 @@ public class ChatEventsHandler implements Listener {
                         player.sendMessage("§8[§5JoinPlugin§8]§d Create group §a" + message + "§d successfully");
                         JoinPluginHelper.clearPlayerMarking(player);
                     } else {
+                        System.out.println(plugin.getConfig().getConfigurationSection("Groups").getKeys(false));
                         player.sendMessage("§8[§5JoinPlugin§8]§c The group §a" + message + "§c is already exist, cancelled create...");
                         JoinPluginHelper.clearPlayerMarking(player);
                     }

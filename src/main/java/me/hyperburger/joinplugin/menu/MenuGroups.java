@@ -45,7 +45,7 @@ public class MenuGroups extends ChestUI {
             player.closeInventory();
             player.sendMessage(new String[]{
                     "",
-                    "§7Please type in chat how much player can in server",
+                    "§7Please type in chat what group do you want",
                     "§7Type §ccancel §7to cancel",
                     ""
             });
@@ -103,7 +103,15 @@ public class MenuGroups extends ChestUI {
             String group = groupss.get(index);
 
             set(i % 9, i / 9, new ItemBuilder(XMaterial.PLAYER_HEAD.parseMaterial(), 1, SkullUtils.applySkin(XMaterial.PLAYER_HEAD.parseItem().getItemMeta(), "http://textures.minecraft.net/texture/1e8c70e6a56161ecdc6b75674070fb308714a2b2b70e1e6d76bc920ce6ce7de6"))
-                    .name("§8[§eGroup§8]§a " + group).getItem(), event -> {
+                    .name("§8[§eGroup§8]§a " + group)
+                    .lore(
+                            "",
+                            "§7Click to edit",
+                            "§7this group!",
+                            "",
+                            "§7Click to §eedit",
+                            "§7Shift right click to §cdelete"
+                    ).getItem(), event -> {
                 if (event.isShiftClick() && event.isRightClick()) {
                     config.set("Groups." + group, null);
                     JoinPlugin.getPlugin(JoinPlugin.class).saveConfig();

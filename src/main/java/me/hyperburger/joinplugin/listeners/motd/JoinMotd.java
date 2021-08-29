@@ -61,7 +61,7 @@ public class JoinMotd implements Listener {
                         }
                         Ucolor.sendMessage(player, Placeholders.replace(player, returnMessage.toString()
                                 .replace("%player%", player.getName()
-                                        .replace("%playerdisplayname%", player.getDisplayName()))));
+                                        .replace("%playerdisplayname%", player.getDisplayName()))).toString());
                     } else {
                         Ucolor.sendMessage(player, Placeholders.replace(player, joinMotdMessages
                                 .replace("%player%", player.getName()

@@ -41,9 +41,26 @@ public class JoinListener implements Listener {
         if (rewardSection == null) return;
 
         if (data.contains(player.getUniqueId().toString()) && data.getString(player.getUniqueId().toString() + ".Join Message") != null) {
-            event.setJoinMessage(Ucolor.translateColorCodes(Placeholders.replace(player, data.getString(player.getUniqueId().toString() + ".Join Message"))
-                    .replace("%player%", player.getName()
-                            .replace("%playerdisplayname%", player.getDisplayName()))));
+            // EssentialsX Vanish Support
+            if (config.getBoolean("SupportEssentialXVanish") && plugin.checkEssentials()) {
+                if (JoinPlugin.essentials.getUser(player.getUniqueId()).isVanished()) {
+                    event.setJoinMessage("");
+                } else {
+                    event.setJoinMessage(Ucolor.translateColorCodes(Placeholders.replace(player, data.getString(player.getUniqueId().toString() + ".Join Message"))
+                            .replace("%player%", player.getName()
+                                    .replace("%playerdisplayname%", player.getDisplayName()))));
+                }
+            }
+            if (config.getBoolean("SupportPluginVanish") && plugin.checkPluginVanish()) {
+                if (VanishAPI.isInvisible(player)) {
+                    event.setJoinMessage("");
+
+                } else {
+                    event.setJoinMessage(Ucolor.translateColorCodes(Placeholders.replace(player, data.getString(player.getUniqueId().toString() + ".Join Message"))
+                            .replace("%player%", player.getName()
+                                    .replace("%playerdisplayname%", player.getDisplayName()))));
+                }
+            }
         } else {
             for (String key : rewardSection.getKeys(false)) {
 

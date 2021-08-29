@@ -2,8 +2,10 @@ package me.hyperburger.joinplugin.commands.subcommands;
 
 import me.hyperburger.joinplugin.commands.SubCommand;
 import me.hyperburger.joinplugin.utilis.DefaultFontInfo;
+import me.hyperburger.joinplugin.utilis.MiniMessageUtil;
 import me.hyperburger.joinplugin.utilis.Placeholders;
 import me.hyperburger.joinplugin.utilis.Ucolor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

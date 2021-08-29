@@ -3,15 +3,14 @@ package me.hyperburger.joinplugin;
 import com.earth2me.essentials.Essentials;
 import featherpowders.implementations.events.InventoryEventsHandler;
 import me.hyperburger.joinplugin.commands.CommandManager;
+import me.hyperburger.joinplugin.commands.TabCompletion;
 import me.hyperburger.joinplugin.events.ChatEventsHandler;
 import me.hyperburger.joinplugin.listeners.*;
 import me.hyperburger.joinplugin.listeners.motd.JoinMotd;
 import me.hyperburger.joinplugin.listeners.motd.ServerMOTD;
 import me.hyperburger.joinplugin.manager.FileManager;
-import me.hyperburger.joinplugin.utilis.discord.Discord;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,6 +28,7 @@ public final class JoinPlugin extends JavaPlugin {
     public void onEnable() {
         new Metrics(this, 12590);
 
+        this.getConfig().options().copyDefaults(true);
         this.saveDefaultConfig();
         this.reloadConfig();
 
@@ -55,8 +55,9 @@ public final class JoinPlugin extends JavaPlugin {
         pluginManager.registerEvents(new ChatEventsHandler(this), this);
     }
 
-    public void registerCommands(){
+    public void registerCommands() {
         this.getCommand("joinplugin").setExecutor(new CommandManager(this));
+        this.getCommand("joinplugin").setTabCompleter(new TabCompletion());
     }
 
     public boolean checkEssentials(){
