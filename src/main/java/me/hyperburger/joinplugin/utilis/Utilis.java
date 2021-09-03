@@ -1,5 +1,8 @@
 package me.hyperburger.joinplugin.utilis;
 
+import me.hyperburger.joinplugin.JoinPlugin;
+import me.hyperburger.joinplugin.versions.MessageManager;
+import me.hyperburger.joinplugin.versions.Message_1_8_8;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -29,6 +32,7 @@ public class Utilis {
 
         }
     }
+
 
     /**
      * Send a message to all online players.
@@ -78,8 +82,7 @@ public class Utilis {
      * @param amount starts from 0.
      */
     public static void spawnFireworks(Location location, int amount){
-        Location loc = location;
-        Firework fw = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+        Firework fw = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
         FireworkMeta fwm = fw.getFireworkMeta();
 
         fwm.setPower(2);
@@ -89,7 +92,7 @@ public class Utilis {
         fw.detonate();
 
         for(int i = 0;i<amount; i++){
-            Firework fw2 = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+            Firework fw2 = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
             fw2.setFireworkMeta(fwm);
         }
     }

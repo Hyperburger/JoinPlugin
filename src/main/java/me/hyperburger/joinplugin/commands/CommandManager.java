@@ -52,6 +52,7 @@ public class CommandManager implements CommandExecutor {
                 }
                 player.sendMessage(" ");
                 player.sendMessage(Ucolor.colorize(" &8[&3&l?&8] &7Author: HyperBurger"));
+                Ucolor.sendMessage(player, " &8[&3&l?&8] &bActionbar & Title messages 1.8.8+");
                 player.sendMessage(" ");
                 player.sendMessage(Ucolor.colorize("    &5&m----------&d&l  &5&m----------&f  &5&m----------"));
                 player.sendMessage(" ");

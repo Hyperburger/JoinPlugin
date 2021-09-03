@@ -1,0 +1,16 @@
+MOTD:
+  MaxPlayers:
+    Enabled: true
+    MaxPlayers: 200
+    KickMessage: "&c&lThe Server is full!"
+  JoinMOTD: # When the player joins
+    Enabled: true # Set to false if you want to disable join MOTD
+    Message: # <--- Add as many lines as you want --->
+      - "&f&l&m----------"
+      - "&a&This is the join MOTD"
+      - "&a&lWelcome to our server"
+      - "&b&l&m---------------"
+  ServerMOTD: # On the server list
+    Enabled: true
+    Line-1: "&d&lJOIN PLUGIN"
+    Line-2: "&f&lCHANGE THIS IN THE CONFIG.YML"

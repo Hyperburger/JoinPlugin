@@ -3,6 +3,8 @@ package me.hyperburger.joinplugin.listeners;
 import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import me.hyperburger.joinplugin.utilis.Utilis;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.Configuration;
@@ -70,19 +72,27 @@ public class JoinListener implements Listener {
                 for (String s : idSection.getStringList("commands")) {
                     Utilis.configCommand(s, player);
                 }
+
+                // Perform ActionBar
+                if (JoinPlugin.setupManager()){ //if version is 1.8.8
+                    JoinPlugin.messageManager.sendActionBar(Ucolor.colorize(idSection.getString("ActionBar Message")), player);
+                } else {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(Ucolor.colorize(idSection.getString("ActionBar Message"))));
+                }
             }
         }
 
         // Perform Titles
-        if (!JoinPlugin.mc18()) {       //TODO: Titles for 1.8
-            if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
+        if (JoinPlugin.setupManager()) {
+            sendTitle(player, config); // Send title for 1.8.8
+
+        } else if (plugin.getConfig().getBoolean("Join Title.Enabled")) {
                 player.sendTitle(config.getString("Join Title.Title"),
                         config.getString("Join Title.SubTitle"),
-                        config.getInt("Join Title.fadeIn"),
-                        config.getInt("Join Title.Stay"),
-                        config.getInt("Join Title.fadeOut"));
+                        config.getInt("Join Title.fadeIn")  * 20,
+                        config.getInt("Join Title.Stay") * 20,
+                        config.getInt("Join Title.fadeOut")  * 20);
             }
-        }
     }
 
     /**
@@ -99,6 +109,18 @@ public class JoinListener implements Listener {
                 .replace("%player%", player.getName()
                 .replace("%playerdisplayname%", player.getDisplayName()))));
 
+    }
+
+    /**
+     * Made this to have less confusion.
+     */
+    private void sendTitle(Player player, Configuration config){
+        JoinPlugin.messageManager.sendTitle(player,
+                config.getInt("Join Title.fadeIn") * 20, // Fade in
+                config.getInt("Join Title.Stay") * 20, // Stay
+                config.getInt("Join Title.fadeOut") * 20, // Fade out
+                config.getString("Join Title.Title"),  // Main Title
+                config.getString("Join Title.SubTitle")); // Sub title
     }
 }
 

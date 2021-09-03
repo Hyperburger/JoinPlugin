@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin.commands.subcommands;
 
 import me.hyperburger.joinplugin.commands.SubCommand;
+import me.hyperburger.joinplugin.configs.MotdFile;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -26,8 +27,8 @@ public class ServerMotd extends SubCommand {
     public void perform(Player player, String[] args, Plugin plugin) {
         if (player.hasPermission("joinplugin.command.displayservermotd")) {
             player.sendMessage(Ucolor.colorize(
-                    plugin.getConfig().getString("MOTD.ServerMOTD.Line-1") + "\n" +
-                            plugin.getConfig().getString("MOTD.ServerMOTD.Line-2")));
+                    MotdFile.getFile().getString("MOTD.ServerMOTD.Line-1") + "\n" +
+                            MotdFile.getFile().getString("MOTD.ServerMOTD.Line-2")));
         } else {
             Ucolor.NOPERM(player, "joinplugin.command.displayservermotd");
         }

@@ -35,18 +35,19 @@ public class TestGroup extends SubCommand {
                 if (groupSection != null) {
                     for (String key : groupSection.getKeys(false)) {
                         ConfigurationSection idSection = groupSection.getConfigurationSection(key);     /* We now have idSection and can access it. */
+                        assert idSection != null;
                         if (idSection.getName().equalsIgnoreCase(group)) {
 
                             player.sendMessage(" ");
-                            Ucolor.sendMessage(player, "&d&oGroup Information: &f&n" + group);
+                            Ucolor.sendMessage(player, "&5&oGroup Information: &f&n" + group);
                             player.sendMessage(" ");
-                            Ucolor.sendMessage(player, "&d&oJoin Message: &f" + idSection.getString("Join Message"));
-                            Ucolor.sendMessage(player, "&d&oQuit Message: &f" + idSection.getString("Quit Message"));
+                            Ucolor.sendMessage(player, "&5&oJoin Message: &f" + idSection.getString("Join Message"));
+                            Ucolor.sendMessage(player, "&5&oQuit Message: &f" + idSection.getString("Quit Message"));
                             player.sendMessage(" ");
-                            Ucolor.sendMessage(player, "&d&oSound: &f" + idSection.getString("Sound"));
-                            Ucolor.sendMessage(player, "&d&oFirework &f" + idSection.getBoolean("Firework"));
+                            Ucolor.sendMessage(player, "&5&oSound: &f" + idSection.getString("Sound"));
+                            Ucolor.sendMessage(player, "&5&oFirework &f" + idSection.getBoolean("Firework"));
                             player.sendMessage(" ");
-                            Ucolor.sendMessage(player, "&d&oCommands Information &7&o((Amount " + idSection.getStringList("commands").size() + "&7&o))");
+                            Ucolor.sendMessage(player, "&5&oCommands Information &7&o((Amount " + idSection.getStringList("commands").size() + "&7&o))");
                             player.sendMessage(" ");
                             for (String command : idSection.getStringList("commands")) {
                                 Ucolor.sendMessage(player, "&7- &f&o" + command);

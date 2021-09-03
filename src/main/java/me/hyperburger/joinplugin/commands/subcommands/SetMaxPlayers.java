@@ -1,13 +1,13 @@
 package me.hyperburger.joinplugin.commands.subcommands;
 
+import me.hyperburger.joinplugin.JoinPlugin;
 import me.hyperburger.joinplugin.commands.SubCommand;
+import me.hyperburger.joinplugin.configs.MotdFile;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.Plugin;
 
 public class SetMaxPlayers extends SubCommand {
-
 
     @Override
     public String getName() {
@@ -25,13 +25,15 @@ public class SetMaxPlayers extends SubCommand {
     }
 
     @Override
-    public void perform(Player player, String[] args, Plugin plugin) {
+    public void perform(Player player, String[] args, Plugin pluginl) {
+
         if (args.length > 1){
 
             if (!player.hasPermission("joinplugin.command.maxplayers")) return;
 
-            plugin.getConfig().set("MOTD.MaxPlayers.MaxPlayers", Integer.parseInt(args[1]));
-            plugin.saveConfig();
+            MotdFile.getFile().set("MOTD.MaxPlayers.MaxPlayers", Integer.parseInt(args[1]));
+            MotdFile.saveFile();
+            System.out.println("Saved motd.yml with new info.");
             Ucolor.sendMessage(player, "&d&lJOIN PLUGIN &fThe max players have been set to &d&n&o" + args[1]);
 
         }

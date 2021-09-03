@@ -1,6 +1,7 @@
 package me.hyperburger.joinplugin.commands.subcommands;
 
 import me.hyperburger.joinplugin.commands.SubCommand;
+import me.hyperburger.joinplugin.configs.MotdFile;
 import me.hyperburger.joinplugin.utilis.Ucolor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -29,7 +30,7 @@ public class DisplayJoinMotd extends SubCommand {
           Ucolor.sendMessage(player, "    &fJoin MOTD from config.yml" );
           Ucolor.sendMessage(player, "    &8&m--------------------&f");
           player.sendMessage(" ");
-          for (String s : plugin.getConfig().getStringList("MOTD.JoinMOTD.Message")) {
+          for (String s : MotdFile.getFile().getStringList("MOTD.JoinMOTD.Message")) {
               Ucolor.sendMessage(player, "    " + s);
           }
           player.sendMessage(" ");
